@@ -89,6 +89,7 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling
 ## Evaluation
 ---
 Pada proyek ini, model dikembangan dengan kasus klasifikasi. Berikut hasil dari pengukuran model:
+
 Grafik di atas menunjukkan perbandingan performa tiga model prediksi: **Boosting**, **Random Forest (RF)**, dan **K-Nearest Neighbors (KNN)**. Nilai yang dibandingkan adalah **Mean Squared Error (MSE)**—semakin kecil MSE, semakin akurat prediksi model tersebut.
 
 Berikut penjelasan untuk setiap model:
