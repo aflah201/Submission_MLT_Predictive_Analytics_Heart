@@ -64,16 +64,28 @@ Pada berkas yang diunduh yakni heart.csv berisi 918 rows x 12 columns. Kolom-kol
 11. **ST_Slope**: kemiringan segmen ST terhadap denyut jantung (heart rate) yang dihitung dengan linear regression dengan kategori Up: upsloping, Flat: flat, Down: downsloping bertipe data `object`.
 12. **HeartDisease**: penyakit jantung dengan hasil keluaran 1 = penyakit jantung dan 0 = normal bertipe data `int64`.
 
-## Data Preparation
+## Data Loading
 ---
-Berikut adalah tahapan dalam melakukan pra-pemrosesan data:
-- Menginstall & mengimport library yang diperlukan.
-- Mengunduh dataset yang akan digunakan dalam analisis data.
+Berikut adalah tahapan dalam melakukan data loading:
+- Menginstall dan import library yang diperlukan seperti:
+  * *Libray* Numpy digunakan untuk memproses larik atau array.
+  * *Libray* Matplotlib digunakan membuat visualisasi data dalam dua dimensi.
+  * *Libray* Seaborn dibangun di ata *library* Matplotlib, digunakan untuk membuat visualisasi data.
+  * *Libray* Pandas digunakan untuk menganalisis dan memanipulasi data.
+- Menginstall Kaggle & unduh dataset.
+
+## Exploratory Data Analysis
+---
+Berikut adalah tahapan dalam melakukan exploratory data analysis
 - Mendeskripsikan variabel dan statistika.
 - Menangani data nilai yang hilang serta membatasi nilai outliers.
 - Menganalisis data kategori dan numerik.
 - Menampilkan hasil grafik analisis.
 - Membuat korelasi untuk fitur numerik.
+
+## Data Preparation
+---
+Berikut adalah tahapan dalam melakukan data preparation:
 - Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik.
 - Membagi dataset 80% untuk data latih, 20% untuk data uji.
 - Melakukan standarisasi.
