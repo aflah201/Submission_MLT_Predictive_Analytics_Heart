@@ -167,5 +167,16 @@ Berikut penjelasan untuk setiap model:
    - MSE cukup tinggi di kedua data (latih dan uji).  
    - Ini menunjukkan model kurang cocok untuk dataset ini atau mungkin terlalu sederhana untuk menangkap pola yang ada.
 
-Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma Boosting.
+Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma Boosting dengan hasil akhir sebagai berikut.
+![Screenshot 2024-10-15 214136](https://github.com/user-attachments/assets/f902514e-0851-4659-b01d-f72c4e4b6aad)
+
+Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
+
+1. **`y_true`**: Nilai asli adalah **57**.
+2. **`prediksi_KNN`**: Model **KNN** memprediksi **50.3**.
+3. **`prediksi_RF`**: Model **Random Forest** memprediksi **53.0**.
+4. **`prediksi_Boosting`**: Model **Boosting** memprediksi **53.5**.
+
+Jadi, nilai asli adalah 57, dan semua model memiliki perbedaan prediksi, tetapi model **Boosting** paling mendekati (53.5).
+
 
