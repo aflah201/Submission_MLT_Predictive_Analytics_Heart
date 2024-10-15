@@ -78,17 +78,62 @@ Berikut adalah tahapan dalam melakukan data loading:
 ---
 Berikut adalah tahapan dalam melakukan exploratory data analysis:
 - Mendeskripsikan variabel dan statistika.
-- Menangani data nilai yang hilang serta membatasi nilai outliers.
-- Menganalisis data kategori dan numerik.
+  * Menggunakan kode `df.info()` untuk menghasilkan deskripsi variabel, dan `df.describe()` untuk menhasilkan nilai statistik pada dataset.
+- Menangani data nilai yang hilang.
+  ```
+  RestingBP = (df.RestingBP == 0).sum()
+  Cholesterol = (df.Cholesterol == 0).sum()
+  print(f'Jumlah nilai 0 pada RestingBP: {RestingBP}')
+  print(f'Jumlah nilai 0 pada Cholesterol: {Cholesterol}')
+  ```
+  ```
+  df.drop(df.loc[(df['RestingBP']==0)].index, inplace=True)
+  df.drop(df.loc[(df['Cholesterol']==0)].index, inplace=True)
+  df.shape
+  ```
+- Membatasi nilai outliers.
+  * Jika ada nilai yang lebih kecil dari (Q1 - 1.5 * IQR) atau lebih besar dari (Q3 + 1.5 * IQR), maka baris tersebut dianggap sebagai outlier. Simbol ~ digunakan untuk membalik kondisi tersebut, sehingga hanya baris yang tidak memiliki outliers yang akan disimpan. Memastikan bahwa jika ada satu saja nilai yang outlier dalam sebuah baris, maka seluruh baris tersebut akan di-drop.
+- Menganalisis data kategori dan numerik dengan cara menampilkan plot analisis data.
 - Menampilkan hasil grafik analisis.
 - Membuat korelasi untuk fitur numerik.
+  ![download (1)](https://github.com/user-attachments/assets/dc08c920-2690-4f17-bea4-91c0b4aa2df7)
+  Matriks korelasi ini menggambarkan seberapa kuat hubungan antara fitur-fitur numerik dalam dataset yang berkaitan dengan penyakit jantung. Mari kita lihat satu per satu dengan lebih sederhana:
+  * **Umur (Age)**:
+     - Ada hubungan positif dengan penyakit jantung (korelasi 0.31). Ini artinya, semakin tua seseorang, semakin besar kemungkinan dia punya penyakit jantung.
+     - Ada juga hubungan negatif dengan `MaxHR` (detak jantung maksimal saat olahraga), sebesar -0.41. Ini berarti semakin tua seseorang, detak jantung maksimalnya cenderung lebih rendah.
+  * **Tekanan Darah Istirahat (RestingBP)**:
+     - Ada sedikit hubungan positif dengan penyakit jantung (0.17). Ini menunjukkan kalau tekanan darah istirahat yang lebih tinggi sedikit berhubungan dengan risiko penyakit jantung.
+     - Tekanan darah juga ada hubungannya dengan usia (0.27), jadi semakin tua, biasanya tekanan darah istirahat bisa naik sedikit.
+  * **Kolesterol**:
+     - Fitur ini hampir tidak ada hubungannya dengan penyakit jantung (korelasi cuma 0.09). Jadi, kadar kolesterol di dataset ini mungkin bukan faktor utama untuk menentukan risiko penyakit jantung.
+     - Hubungan dengan fitur lain juga sangat lemah, jadi kolesterol tampaknya kurang berpengaruh dalam kasus ini.
+  * **Detak Jantung Maksimal (MaxHR)**:
+     - Ada hubungan negatif dengan penyakit jantung (-0.39). Artinya, detak jantung maksimal yang lebih rendah cenderung dihubungkan dengan risiko penyakit jantung yang lebih tinggi.
+     - Juga ada hubungan negatif dengan umur (-0.41), yang menunjukkan bahwa seiring bertambahnya usia, detak jantung maksimal kita biasanya menurun.
+  * **Oldpeak (Penurunan ST setelah olahraga)**:
+     - Ini fitur yang punya hubungan paling kuat dengan penyakit jantung (0.5). Jadi, semakin tinggi penurunan ST ini, makin besar peluang seseorang mengalami penyakit jantung.
+     - Oldpeak juga ada hubungannya dengan `MaxHR` (-0.28), menunjukkan bahwa nilai Oldpeak cenderung lebih tinggi kalau detak jantung maksimal menurun. Secara keseluruhan, fitur yang paling berpengaruh terhadap penyakit jantung adalah `Oldpeak`, diikuti oleh `MaxHR` dan `Umur`, sementara fitur seperti `Kolesterol` kelihatannya tidak terlalu berpengaruh di sini.
 
 ## Data Preparation
 ---
 Berikut adalah tahapan dalam melakukan data preparation:
-- Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik.
+- Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik, setelah selesai membuat fitur encoding jangan lupa untuk menghapus kolom yang bertipe data `object` dikarenakan sudah diubah menjadi data numerik.
+  ```
+  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['Sex'], prefix='Sex', dtype='int')], axis=1)
+  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ChestPainType'], prefix='ChestPainType', dtype='int')], axis=1)
+  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['RestingECG'], prefix='RestingECG', dtype='int')], axis=1)
+  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ExerciseAngina'], prefix='ExerciseAngina', dtype='int')], axis=1)
+  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ST_Slope'], prefix='ST_Slope', dtype='int')], axis=1)
+  df_cleaned.drop(['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope'], axis=1, inplace=True)
+  ```
 - Membagi dataset 80% untuk data latih, 20% untuk data uji.
-- Melakukan standarisasi.
+  ```
+  X = df_cleaned.drop(["Age"],axis =1)
+  y = df_cleaned["Age"]
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 123)
+  ```
+  pada sumbu X gunakan seluruh dataset kecuali `Age`, dan pada sumbu Y kita menggunakan dataset `Age` sebagai data yang akan di analisis.
+- Melakukan standarisasi, hal ini dilakukan untuk membuat semua fitur berada dalam skala data yang sama yaitu dengan range 0-1
 
 ## Modeling
 ---
@@ -99,7 +144,7 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling
 - Membuat model dengan Algoritma Random Forest.
   - Random Forest adalah pengembangan dari metode Decision Tree yang menggunakan beberapa Decision Tree, dimana setiap Decision Tree telah dilakukan pelatihan menggunakan sampel individu dan setiap atribut dipecah pada pohon yang dipilih antara atribut subset yang bersifat acak. Random Forest memiliki beberapa kelebihan, yaitu dapat meningkatkan hasil akurasi jika terdapat data yang hilang, dan untuk resisting outliers, serta efisien untuk penyimpanan sebuah data. Selain itu, Random Forest mempunyai proses seleksi fitur dimana mampu mengambil fitur terbaik sehingga dapat meningkatkan performa terhadap model klasifikasi. Dengan adanya seleksi fitur tentu Random Forest dapat bekerja pada big data dengan parameter yang kompleks secara efektif.[[4](https://journal.stekom.ac.id/index.php/Bisnis/article/download/247/182)]
 - Membuat model dengan Algortima Boosting.
-  - 
+  - Adaptive boosting (adaboost) merupakan salah satu dari beberapa varian pada algoritma boosting. Adaboost merupakan ensemble learning yang sering digunakan pada algoritma boosting Boosting bisa dikombinasikan dengan classifier algoritma yang lain untuk meningkatkan performa klasifikasi. Tentunya secara intuitif, penggabungan beberapa model akan membantu jika model tersebut berbeda satu sama lain. Adaboost dan variannya telah sukses diterapkan pada beberapa bidang (domain) karena dasar teorinya yang kuat, presdiksi yang akurat, dan kesederhanaan yang besar. [[5](https://ejournal.poltekharber.ac.id/index.php/informatika/article/view/5675/2640)]
 
 ## Evaluation
 ---
