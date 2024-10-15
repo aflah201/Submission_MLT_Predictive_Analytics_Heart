@@ -26,14 +26,14 @@ Penyakit gagal jantung dapat disebabkan oleh beberapa kondisi penyakit jantung. 
 ### Problem Statements
 
 Berdasarkan latar belakang diatas, berikut ini rumusan masalah yang dapat diselesaikan pada proyek ini:
-- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung?
-- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung menggunakan machine learning?
+- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
+- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung pada manusia menggunakan machine learning?
 
 ### Goals Statements
 
 Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan pada proyek ini:
 - Melakukan pra-pemrosesan data dengan baik agar dapat digunakan dalam pembuatan model.
-- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung.
+- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan rata-rata umur.
 
 ### Solution Statements
 
@@ -185,7 +185,15 @@ sns.boxplot(x=df['Cholesterol'])
 
 sns.boxplot(x=df['Oldpeak'])
 
-"""9. Membatasi nilai outliers."""
+"""Dari boxplot diatas, kita dapat mengidentifikasi **outliers** (pencilan) dalam data:
+
+1. **Garis tengah kotak** menunjukkan **median** dari data `'RestingBP','Cholesterol', 'Oldpeak'`.
+2. **Kotak** menunjukkan rentang dari **kuartil pertama (Q1)** hingga **kuartil ketiga (Q3)**, menggambarkan **interquartile range (IQR)**, yaitu rentang tengah 50% dari data.
+3. **Garis-garis horizontal** (whiskers) yang keluar dari kotak menunjukkan rentang data di luar Q1 dan Q3, umumnya diperpanjang hingga 1,5 kali IQR dari kuartil terendah (Q1) dan tertinggi (Q3).
+4. **Titik-titik** di luar whiskers adalah **outliers**. Titik-titik ini mewakili nilai yang berada di luar rentang 1,5 kali IQR dari Q1 dan Q3, menandakan nilai `'RestingBP','Cholesterol', 'Oldpeak'` yang jauh dari mayoritas data.
+
+9. Membatasi nilai outliers.
+"""
 
 df_numeric = df.select_dtypes(include=[np.number])
 Q1 = df_numeric.quantile(0.25)
