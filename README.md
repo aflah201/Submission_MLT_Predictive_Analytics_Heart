@@ -13,14 +13,14 @@ Penyakit gagal jantung dapat disebabkan oleh beberapa kondisi penyakit jantung. 
 ### Problem Statements
 
 Berdasarkan latar belakang diatas, berikut ini rumusan masalah yang dapat diselesaikan pada proyek ini:
-- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung?
-- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung menggunakan machine learning?
+- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
+- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung pada manusia menggunakan machine learning?
 
 ### Goals Statements
 
 Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan pada proyek ini:
 - Melakukan pra-pemrosesan data dengan baik agar dapat digunakan dalam pembuatan model.
-- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung.
+- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan rata-rata umur.
 
 ### Solution Statements
 
@@ -76,7 +76,7 @@ Berikut adalah tahapan dalam melakukan data loading:
 
 ## Exploratory Data Analysis
 ---
-Berikut adalah tahapan dalam melakukan exploratory data analysis
+Berikut adalah tahapan dalam melakukan exploratory data analysis:
 - Mendeskripsikan variabel dan statistika.
 - Menangani data nilai yang hilang serta membatasi nilai outliers.
 - Menganalisis data kategori dan numerik.
@@ -95,8 +95,11 @@ Berikut adalah tahapan dalam melakukan data preparation:
 Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling* terhadap data, dengan menggunakan beberapa algoritma, diantaranya sebagai berikut:
 - Membuat dataframe untuk analisis model.
 - Membuat model dengan Algoritma K-Nearest Neighbor.
+  - Algoritma k-Nearest Neighbor adalah algoritma supervised learning dimana hasil dari instance yang baru diklasikasikan berdasarkan mayoritas dari kategori k-tetangga terdekat. Tujuan dari algoritma ini adalah untuk mengklasikasikan obyek baru berdasarkan atribut dan sample-sample dari training data. Algoritma k-Nearest Neighbor menggunakan Neighborhood Classication sebagai nilai prediksi dari nilai instance yang baru.[[3](https://www.researchgate.net/profile/Asep-Ismail-3/publication/330840826_Cara_Kerja_Algoritma_k-Nearest_Neighbor_k-NN/links/5c56f8d9458515a4c7553b2b/Cara-Kerja-Algoritma-k-Nearest-Neighbor-k-NN.pdf)]
 - Membuat model dengan Algoritma Random Forest.
+  - Random Forest adalah pengembangan dari metode Decision Tree yang menggunakan beberapa Decision Tree, dimana setiap Decision Tree telah dilakukan pelatihan menggunakan sampel individu dan setiap atribut dipecah pada pohon yang dipilih antara atribut subset yang bersifat acak. Random Forest memiliki beberapa kelebihan, yaitu dapat meningkatkan hasil akurasi jika terdapat data yang hilang, dan untuk resisting outliers, serta efisien untuk penyimpanan sebuah data. Selain itu, Random Forest mempunyai proses seleksi fitur dimana mampu mengambil fitur terbaik sehingga dapat meningkatkan performa terhadap model klasifikasi. Dengan adanya seleksi fitur tentu Random Forest dapat bekerja pada big data dengan parameter yang kompleks secara efektif.[[4](https://journal.stekom.ac.id/index.php/Bisnis/article/download/247/182)]
 - Membuat model dengan Algortima Boosting.
+  - 
 
 ## Evaluation
 ---
