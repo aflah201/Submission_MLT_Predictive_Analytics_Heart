@@ -13,26 +13,30 @@ Penyakit gagal jantung dapat disebabkan oleh beberapa kondisi penyakit jantung. 
 ### Problem Statements
 
 Berdasarkan latar belakang diatas, berikut ini rumusan masalah yang dapat diselesaikan pada proyek ini:
-- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
-- Bagaimana memprediksi resiko gagal jantung melalui faktor resiko Usia?
+1. Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
+2. Bagaimana memprediksi resiko gagal jantung melalui faktor resiko Usia, Tekanan Darah Istirahat, Kolesterol, Detak Jantung Maksimum, dan Puncak Tua?
 
 ### Goals Statements
 
 Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan pada proyek ini:
-- Melakukan pra-pemrosesan data dengan baik agar dapat digunakan dalam pembuatan model.
-- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan faktor usia.
+1. **Melakukan pra-pemrosesan pada data penyakit gagal jantung** untuk memastikan data yang digunakan dalam pengembangan model memiliki kualitas yang baik dan sesuai dengan standar, sehingga model yang dihasilkan memiliki akurasi yang optimal.
+2. **Mengembangkan model prediksi risiko gagal jantung** berdasarkan faktor risiko seperti Usia, Tekanan Darah Istirahat, Kolesterol, Detak Jantung Maksimum, dan Puncak Tua, dengan tujuan untuk membantu dalam mengidentifikasi individu yang memiliki risiko tinggi secara lebih akurat.
 
 ### Solution Statements
 
 Berdasarkan tujuan diatas, berikut ini solusi yang dapat diselesaikan pada proyek ini:
-- Untuk pra-pemrosesan data dapat dilakukan dengan beberapa teknik diantaranya:
-   * Melakukan *drop* pada kolom `FastingBS` karena tidak diperlukan dalam analisis data.
-   * Mengatasi masalah data yang kosong dengan cara menghapus beberapa data yang terindikasi kosong yang menyebabkan data statistik bernilai 0.
-   * Melakukan Encoding terhadap kolom yang bertipe data `object`.
-   * Melakukan pembagian dataset menjadi dua bagian dengan rasio 80:20, 80% untuk data latih dan 20% untuk data uji.
-   * Melakukan *Standard Scaler*.
+1. **Solusi untuk Melakukan Pra-Pemrosesan Data Penyakit Gagal Jantung**:
+  - Lakukan **pembersihan data** untuk mengatasi data yang hilang, duplikat, atau data yang tidak valid. Ini bisa dilakukan dengan teknik imputasi atau penghapusan baris/kolom yang tidak relevan.
+  - **Normalisasi atau standarisasi** fitur numerik seperti Usia, Tekanan Darah, Kolesterol, dan Detak Jantung untuk memastikan bahwa skala variabel tidak mempengaruhi model.
+  - Lakukan **pemeriksaan dan penanganan outlier** pada variabel-variabel numerik untuk menghindari pengaruh negatif terhadap performa model.
+  - Gunakan **teknik encoding** untuk mengubah variabel kategorikal menjadi numerik sehingga bisa diproses oleh algoritma machine learning.
+  - Pisahkan data menjadi **set training dan set testing** untuk melatih dan menguji model
+  - Melakukan **Standard Scaler**
 
-- Untuk penggunaan model dengan algoritma kami uji beberapa algoritma diantaranya Algoritma Random Forest, Algoritma K-Nearest Neighbor, dan Algoritma Boosting.
+2. **Solusi untuk Mengembangkan Model Prediksi Risiko Gagal Jantung**:
+  - Pilih algoritma machine learning yang cocok, misalnya **K-Nearest_Neighbor**, **Random Forest**, atau **Boosting**, untuk membangun model prediksi berdasarkan faktor risiko yang telah ditentukan.
+  - **Latih model** menggunakan set data yang telah diproses, dan lakukan optimasi hyperparameter menggunakan teknik seperti **Random Search** untuk mendapatkan konfigurasi terbaik.
+  - Evaluasi model menggunakan **metrik evaluasi** seperti akurasi, precision, recall, F1-score untuk menentukan performa model dalam memprediksi risiko gagal jantung.
 
 ---
 ## Data Understanding
@@ -52,11 +56,11 @@ Variable | Keterangan | Tipe Data
 --- | --- | ---
 **Age** | Usia pasien dalam jumlah tahun | `int64`
 **Sex** | Jenis kelamin pasien dengan kategori M = Male/Pria dan F = Female/Perempuan | `object`
-**ChestPainType** | Jenis nyeri dada dengan kategori TA: Typical Angina *Typical Angina* adalah nyeri dada yang disebabkan oleh aktivitas fisik atau stres emosional, dan berkurang saat istirahat atau mengonsumsi nitrogliserin, ATA: Atypical Angina *Atypical Angina* adalah nyeri dada yang tidak memenuhi kriteria angina tipikal, tetapi sesuai dengan penyebab iskemik jantung, NAP: Non-Anginal Pain *Non-Anginal Pain* adalah nyeri dada yang tidak disebabkan oleh penyakit jantung, ASY: Asymptomatic *Asymptomatic* adalah istilah yang menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun. | `object`
+**ChestPainType** | Jenis nyeri dada dengan kategori TA: Typical Angina ***Typical Angina*** adalah nyeri dada yang disebabkan oleh aktivitas fisik atau stres emosional, dan berkurang saat istirahat atau mengonsumsi nitrogliserin, ATA: Atypical Angina ***Atypical Angina*** adalah nyeri dada yang tidak memenuhi kriteria angina tipikal, tetapi sesuai dengan penyebab iskemik jantung, NAP: Non-Anginal Pain ***Non-Anginal Pain*** adalah nyeri dada yang tidak disebabkan oleh penyakit jantung, ASY: Asymptomatic ***Asymptomatic*** adalah istilah yang menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun. | `object`
 **RestingBP** | Tekanan darah istirahat | `int64`
 **Cholesterol** | Kolesterol serum | `int64`
 **FastingBS** | Gula darah puasa | `int64`
-**RestingECG** | Hasil elektrokardiogram istirahat dengan kategori Normal, ST = Mengalami kelainan gelombang ST-T, LVH = menunjukkan kemungkinan atau pasti hipertrofi ventrikel kiri | `object`.
+**RestingECG** | Hasil elektrokardiogram istirahat dengan kategori Normal, ST = Mengalami kelainan gelombang ST-T, LVH = menunjukkan kemungkinan atau pasti hipertrofi ventrikel kiri | `object`
 **MaxHR** | Detak jantung maksimum tercapai yang berisi nilai numerik antara 60 dan 202 | `int64`
 **ExerciseAngina** | Angina akibat olahraga dengan kategori Y = Yes/Iya & N = No/Tidak | `object`
 **Oldpeak** | Puncak tua nilai numerik yang diukur pada depresi | `float64`
@@ -72,6 +76,25 @@ Berikut adalah tahapan dalam melakukan data loading:
   * *Libray* Seaborn dibangun di ata *library* Matplotlib, digunakan untuk membuat visualisasi data.
   * *Libray* Pandas digunakan untuk menganalisis dan memanipulasi data.
 - Menginstall Kaggle & unduh dataset.
+
+---
+## Exploratory Data Analysis
+Berikut adalah tahapan dalam melakukan exploratory data analysis:
+- Membersihkan data yang terindikasi berisi nilai 0 dengan cara menghapus kolom yang dipilih.
+- Menghapus kolom yang tidak diperlukan dalam analisis seperti kolom `FastingBS`.
+- Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier.
+  ```
+  df_numeric = df.select_dtypes(include=[np.number])
+  Q1 = df_numeric.quantile(0.25)
+  Q3 = df_numeric.quantile(0.75)
+  IQR=Q3-Q1
+  df_cleaned=df[~((df_numeric<(Q1-1.5*IQR))|(df_numeric>(Q3+1.5*IQR))).any(axis=1)]
+  ```
+- Membagi dua bagian untuk fitur kategori untuk data `['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']` dan fitur numerik untuk data `['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'HeartDisease']`.
+- Menampilkan plot kategori dan numerik.
+- Mengecek rata-rata terhadap fitur kategori.
+- Menampilkan hubungan fitur numerik.
+- Menampilkan korelasi matriks untuk fitur numerik.
 
 ---
 ## Data Preparation
@@ -104,40 +127,104 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling
   - Random Forest adalah pengembangan dari metode Decision Tree yang menggunakan beberapa Decision Tree, dimana setiap Decision Tree telah dilakukan pelatihan menggunakan sampel individu dan setiap atribut dipecah pada pohon yang dipilih antara atribut subset yang bersifat acak. Random Forest memiliki beberapa kelebihan, yaitu dapat meningkatkan hasil akurasi jika terdapat data yang hilang, dan untuk resisting outliers, serta efisien untuk penyimpanan sebuah data. Selain itu, Random Forest mempunyai proses seleksi fitur dimana mampu mengambil fitur terbaik sehingga dapat meningkatkan performa terhadap model klasifikasi. Dengan adanya seleksi fitur tentu Random Forest dapat bekerja pada big data dengan parameter yang kompleks secara efektif.[[4](https://journal.stekom.ac.id/index.php/Bisnis/article/download/247/182)]
 - Membuat model dengan Algortima Boosting.
   - Adaptive boosting (adaboost) merupakan salah satu dari beberapa varian pada algoritma boosting. Adaboost merupakan ensemble learning yang sering digunakan pada algoritma boosting Boosting bisa dikombinasikan dengan classifier algoritma yang lain untuk meningkatkan performa klasifikasi. Tentunya secara intuitif, penggabungan beberapa model akan membantu jika model tersebut berbeda satu sama lain. Adaboost dan variannya telah sukses diterapkan pada beberapa bidang (domain) karena dasar teorinya yang kuat, presdiksi yang akurat, dan kesederhanaan yang besar. [[5](https://ejournal.poltekharber.ac.id/index.php/informatika/article/view/5675/2640)]
+- Implementasi Random Search untuk mengetahui parameter terbaik dan nilai terbaik.
+---
+## Model Devlopment Testing
+Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopment Testing* terhadap data, diantaranya sebagai berikut:
+1. Membuat prediksi Model MSE (Mean Squared Error)
+2. Membuat prediksi Model classifier
 
 ---
 ## Evaluation
-Pada proyek ini, model dikembangan dengan kasus Regresi. Berikut hasil dari pengukuran model:
+Setelah melakukan model developmenet testing pada data, langkah selanjutnya adalah *Evaluation* terhadap data, diantaranya sebagai berikut:
+1. Menampilkan hasil komparasi dari ketiga algoritma **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting**.
+   
+
+
+    Berdasarkan tabel komparasi di atas, berikut adalah penjelasan dari hasil evaluasi tiga algoritma, yaitu **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting**:
+    - **KNN (K-Nearest Neighbors)**
+      Keterangan | Nilai
+      **Akurasi:** | 89.21%  
+      **Presisi:** | 89.86%  
+      **Recall:** | 88.57%  
+      **F1-Score:** | 89.21%
+       
+      **KNN** menunjukkan kinerja tertinggi secara keseluruhan. Akurasi dan F1-Score yang lebih tinggi menandakan bahwa KNN mampu memprediksi kelas dengan baik dan seimbang antara precision dan recall.
+
+    - **RF (Random Forest)**
+      Keterangan | Nilai
+      **Akurasi:** | 88.49%  
+      **Presisi:** | 87.50%  
+      **Recall:** | 90.00%  
+      **F1-Score:** | 88.73%
+
+      **Random Forest** memiliki **Recall** paling tinggi (90%). Ini berarti RF lebih baik dalam mengidentifikasi kasus positif dengan benar, namun sedikit kalah dalam akurasi dan F1-Score dibandingkan KNN. Jika aplikasi memerlukan fokus pada deteksi positif yang tinggi (misalnya deteksi penyakit), RF bisa menjadi pilihan yang baik.
+
+    - **Boosting**
+      Keterangan | Nilai
+      **Akurasi:** | 84.17%  
+      **Presisi:** | 88.71%  
+      **Recall:** | 78.57%  
+      **F1-Score:** | 83.33%
+
+      **Boosting** memiliki performa terendah dalam hal akurasi dan F1-Score. Meskipun presisinya tinggi (88.71%), **Recall** relatif rendah (78.57%). Ini menunjukkan bahwa Boosting lebih sering melewatkan kasus positif dibandingkan model lainnya.  
+
+    **Kesimpulan:**
+    - **KNN** memberikan kinerja terbaik secara keseluruhan karena memiliki keseimbangan antara akurasi, precision, dan recall.
+    - **Random Forest** unggul dalam hal **Recall**, sehingga cocok jika prioritas adalah meminimalkan false negative.
+    - **Boosting** meskipun memiliki presisi tinggi, kurang optimal dalam menangkap semua kasus positif (recall rendah).
+
+2. Menampilkan hasil evaluasi MSE
+
+Berikut hasil dari pengukuran model:
 ![download](https://github.com/user-attachments/assets/e0b581c7-4319-47bf-b7d9-b5f612067581)
 
-Grafik di atas menunjukkan perbandingan performa tiga model prediksi: **Boosting**, **Random Forest (RF)**, dan **K-Nearest Neighbors (KNN)**. Nilai yang dibandingkan adalah **Mean Squared Error (MSE)**—semakin kecil MSE, semakin akurat prediksi model tersebut.
+Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Random Forest (RF), K-Nearest Neighbors (KNN), dan Boosting. Grafik tersebut membandingkan performa model pada data training dan testing dalam bentuk bar horizontal. Berikut penjelasan dari setiap model:
 
-Berikut penjelasan untuk setiap model:
+  - **Boosting**:
+    - Performa pada data training (warna biru) dan testing (warna oranye) sangat mirip dan tinggi, menunjukkan bahwa model ini memiliki kemampuan generalisasi yang baik. Tidak ada tanda overfitting atau underfitting yang signifikan.
 
-1. **Boosting**  
-   - Nilai kesalahan (MSE) pada data latih (*train set*) lebih rendah daripada pada data uji (*test set*), tapi perbedaannya tidak terlalu jauh.  
-   - Ini menunjukkan model cukup mampu memahami pola data dan **tidak mengalami overfitting** (yaitu kondisi di mana model terlalu baik di data latih tapi buruk di data baru).
+  - **KNN**:
+    - Performa pada data training dan testing hampir sama seperti Boosting. Nilai pada kedua dataset ini juga tinggi dan konsisten. Hal ini menunjukkan bahwa KNN cukup efektif dalam memprediksi data baru tanpa overfitting.
 
-2. **Random Forest (RF)**  
-   - MSE di data latih sangat rendah, tapi di data uji jauh lebih tinggi.  
-   - Ini menandakan model mengalami **overfitting**—terlalu baik di data latih tapi kesulitan menangani data baru.
+  - **Random Forest (RF)**:
+    - Pada model ini, terlihat perbedaan yang cukup signifikan antara performa pada data training dan testing. Performa pada data training jauh lebih rendah dibandingkan dengan testing, yang mungkin menunjukkan bahwa model ini mengalami underfitting atau memiliki performa yang kurang optimal pada data training.
 
-3. **KNN (K-Nearest Neighbors)**  
-   - MSE cukup tinggi di kedua data (latih dan uji).  
-   - Ini menunjukkan model kurang cocok untuk dataset ini atau mungkin terlalu sederhana untuk menangkap pola yang ada.
+Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
 
-Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma Boosting dengan hasil akhir sebagai berikut.
+Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
 ![Screenshot 2024-10-15 214136](https://github.com/user-attachments/assets/f902514e-0851-4659-b01d-f72c4e4b6aad)
 
 Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
 
-1. **`HeartDisease`**: Nilai asli adalah **0**.
-2. **`prediksi_KNN`**: Model **KNN** memprediksi **0.4**.
-3. **`prediksi_RF`**: Model **Random Forest** memprediksi **0.8**.
-4. **`prediksi_Boosting`**: Model **Boosting** memprediksi **0.5**.
+  * **`HeartDisease`**: Nilai asli adalah **0**.
+  * **`prediksi_KNN`**: Model **KNN** memprediksi **0.4**.
+  * **`prediksi_RF`**: Model **Random Forest** memprediksi **0.8**.
+  * **`prediksi_Boosting`**: Model **Boosting** memprediksi **0.5**.
 
 Kita dapat melihat bahwa model dengan algoritma KNN memiliki hasil prediksi 0.4, algoritma Random Forest memiliki hasil prediksi 0.8, dan algoritma Boosting memiliki hasil prediksi 0.5, perlu diketahui jika probabilitas lebih dari 0.5, kelas yang diprediksi adalah 1, jika kurang dari 0.5, kelas yang diprediksi adalah 0.
 Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi model **KNN** paling mendekati (0.4).
+
+3. Menampilkan hasil evaluasi classifier
+
+Hasil plot di atas menunjukkan matriks kebingungan (confusion matrix) dari tiga model klasifikasi yang berbeda: KNN, Random Forest, dan Boosting. Setiap matriks menggambarkan seberapa baik masing-masing model memprediksi kelas data berdasarkan data aktual. Berikut penjelasan dari setiap plot:
+
+  1. **KNN Confusion Matrix (Merah)**:
+    - Matriks ini menunjukkan bahwa model KNN memprediksi dengan benar sebanyak **65** kasus untuk kelas 0 dan **10** kasus untuk kelas 1.
+    - Namun, model ini juga salah memprediksi sebanyak **4** kasus dari kelas 0 menjadi kelas 1 dan **60** kasus dari kelas 1 menjadi kelas 0.
+    - Ini menunjukkan bahwa model KNN memiliki performa yang tidak terlalu baik, terutama dalam memprediksi kelas 1, karena banyak prediksi salah pada kelas tersebut.
+
+  2. **Random Forest Confusion Matrix (Hijau)**:
+    - Matriks ini menunjukkan bahwa model Random Forest memprediksi dengan benar sebanyak **59** kasus untuk kelas 0 dan **41** kasus untuk kelas 1.
+    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **29** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+    - Model ini memiliki akurasi yang lebih baik dibandingkan KNN, terutama karena lebih sedikit kesalahan dalam memprediksi kelas 1.
+
+  3. **Boosting Confusion Matrix (Biru)**:
+    - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
+    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+    - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
+
+**Kesimpulan**: Dari ketiga model di atas, **Boosting** memiliki performa terbaik dengan jumlah prediksi benar yang paling tinggi dan jumlah kesalahan yang paling rendah. Model **Random Forest** berada di posisi kedua, sementara **KNN** memiliki performa yang paling rendah, terutama dalam memprediksi kelas 1.
 
 ---
 Kesimpulan
