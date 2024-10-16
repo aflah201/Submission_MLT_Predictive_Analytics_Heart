@@ -194,7 +194,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
 
     Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
     
-    Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
+    Hasil prediksi yang paling mendekati nilai HeartDisease didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
     
     ![Screenshot 2024-10-17 031140](https://github.com/user-attachments/assets/07199710-d20a-4a24-9072-002e7892e8ed)
     
