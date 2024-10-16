@@ -47,14 +47,12 @@ Kategori | Health, Health Conditions, Classification, Heart Conditions, Healthca
 Jenis dan Ukuran Berkas | CSV (35.92 kB)
 
 Pada berkas yang diunduh yakni heart.csv berisi 918 rows x 12 columns. Kolom-kolom tersebut berisi diantaranya 1 kolom berisi tipe data `float64`, 6 kolom berisi tipe data `int64`, dan 5 kolom berisi tipe data `object`. Untuk penjelasan mengenai variabel dapat dilihat sebagai berikut:
+
 Variable | Keterangan | Tipe Data
+--- | --- | ---
 **Age** | Usia pasien dalam jumlah tahun | `int64`
 **Sex** | Jenis kelamin pasien dengan kategori M = Male/Pria dan F = Female/Perempuan | `object`
-**ChestPainType** | Jenis nyeri dada dengan kategori TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic | `object`
-   - *Typical Angina* adalah nyeri dada yang disebabkan oleh aktivitas fisik atau stres emosional, dan berkurang saat istirahat atau mengonsumsi nitrogliserin.
-   - *Atypical Angina* adalah nyeri dada yang tidak memenuhi kriteria angina tipikal, tetapi sesuai dengan penyebab iskemik jantung.
-   - *Non-Anginal Pain* adalah nyeri dada yang tidak disebabkan oleh penyakit jantung.
-   - *Asymptomatic* adalah istilah yang menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun.
+**ChestPainType** | Jenis nyeri dada dengan kategori TA: Typical Angina *Typical Angina* adalah nyeri dada yang disebabkan oleh aktivitas fisik atau stres emosional, dan berkurang saat istirahat atau mengonsumsi nitrogliserin, ATA: Atypical Angina *Atypical Angina* adalah nyeri dada yang tidak memenuhi kriteria angina tipikal, tetapi sesuai dengan penyebab iskemik jantung, NAP: Non-Anginal Pain *Non-Anginal Pain* adalah nyeri dada yang tidak disebabkan oleh penyakit jantung, ASY: Asymptomatic *Asymptomatic* adalah istilah yang menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun. | `object`
 **RestingBP** | Tekanan darah istirahat | `int64`
 **Cholesterol** | Kolesterol serum | `int64`
 **FastingBS** | Gula darah puasa | `int64`
