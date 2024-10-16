@@ -212,18 +212,18 @@ Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi m
 
 Hasil plot di atas menunjukkan matriks kebingungan (confusion matrix) dari tiga model klasifikasi yang berbeda: KNN, Random Forest, dan Boosting. Setiap matriks menggambarkan seberapa baik masing-masing model memprediksi kelas data berdasarkan data aktual. Berikut penjelasan dari setiap plot:
 
-    1. **KNN Confusion Matrix (Merah)**:
-      - Matriks ini menunjukkan bahwa model KNN memprediksi dengan benar sebanyak **65** kasus untuk kelas 0 dan **10** kasus untuk kelas 1.
-      - Namun, model ini juga salah memprediksi sebanyak **4** kasus dari kelas 0 menjadi kelas 1 dan **60** kasus dari kelas 1 menjadi kelas 0.
-      - Ini menunjukkan bahwa model KNN memiliki performa yang tidak terlalu baik, terutama dalam memprediksi kelas 1, karena banyak prediksi salah pada kelas tersebut.
+  - **KNN Confusion Matrix (Merah)**:
+    - Matriks ini menunjukkan bahwa model KNN memprediksi dengan benar sebanyak **65** kasus untuk kelas 0 dan **10** kasus untuk kelas 1.
+    - Namun, model ini juga salah memprediksi sebanyak **4** kasus dari kelas 0 menjadi kelas 1 dan **60** kasus dari kelas 1 menjadi kelas 0.
+    - Ini menunjukkan bahwa model KNN memiliki performa yang tidak terlalu baik, terutama dalam memprediksi kelas 1, karena banyak prediksi salah pada kelas tersebut.
 
-    2. **Random Forest Confusion Matrix (Hijau)**:
-      - Matriks ini menunjukkan bahwa model Random Forest memprediksi dengan benar sebanyak **59** kasus untuk kelas 0 dan **41** kasus untuk kelas 1.
-      - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **29** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
-      - Model ini memiliki akurasi yang lebih baik dibandingkan KNN, terutama karena lebih sedikit kesalahan dalam memprediksi kelas 1.
+  - **Random Forest Confusion Matrix (Hijau)**:
+    - Matriks ini menunjukkan bahwa model Random Forest memprediksi dengan benar sebanyak **59** kasus untuk kelas 0 dan **41** kasus untuk kelas 1.
+    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **29** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+    - Model ini memiliki akurasi yang lebih baik dibandingkan KNN, terutama karena lebih sedikit kesalahan dalam memprediksi kelas 1.
 
-    3. **Boosting Confusion Matrix (Biru)**:
-      - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
+  - **Boosting Confusion Matrix (Biru)**:
+    - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
       - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
       - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
 
