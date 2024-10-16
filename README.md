@@ -107,7 +107,7 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling
 
 ---
 ## Evaluation
-Pada proyek ini, model dikembangan dengan kasus klasifikasi. Berikut hasil dari pengukuran model:
+Pada proyek ini, model dikembangan dengan kasus Regresi. Berikut hasil dari pengukuran model:
 ![download](https://github.com/user-attachments/assets/e0b581c7-4319-47bf-b7d9-b5f612067581)
 
 Grafik di atas menunjukkan perbandingan performa tiga model prediksi: **Boosting**, **Random Forest (RF)**, dan **K-Nearest Neighbors (KNN)**. Nilai yang dibandingkan adalah **Mean Squared Error (MSE)**—semakin kecil MSE, semakin akurat prediksi model tersebut.
@@ -131,11 +131,18 @@ Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma B
 
 Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
 
-1. **`y_true`**: Nilai asli adalah **57**.
-2. **`prediksi_KNN`**: Model **KNN** memprediksi **50.3**.
-3. **`prediksi_RF`**: Model **Random Forest** memprediksi **53.0**.
-4. **`prediksi_Boosting`**: Model **Boosting** memprediksi **53.5**.
+1. **`HeartDisease`**: Nilai asli adalah **0**.
+2. **`prediksi_KNN`**: Model **KNN** memprediksi **0.4**.
+3. **`prediksi_RF`**: Model **Random Forest** memprediksi **0.8**.
+4. **`prediksi_Boosting`**: Model **Boosting** memprediksi **0.5**.
 
-Jadi, nilai asli adalah 57, dan semua model memiliki perbedaan prediksi, tetapi model **Boosting** paling mendekati (53.5).
+Kita dapat melihat bahwa model dengan algoritma KNN memiliki hasil prediksi 0.4, algoritma Random Forest memiliki hasil prediksi 0.8, dan algoritma Boosting memiliki hasil prediksi 0.5, perlu diketahui jika probabilitas lebih dari 0.5, kelas yang diprediksi adalah 1, jika kurang dari 0.5, kelas yang diprediksi adalah 0.
+Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi model **KNN** paling mendekati (0.4).
 
+---
+Kesimpulan
+Pengujian setiap model dengan algoritma yang berbeda menghasilkan nilai prediksi yang berbeda pula. Model dengan nilai yang mendekati nilai sebenarnya diperoleh pada prediksi dengan menggunakan algoritma KNN. Untuk prediksi menggunakan algoritma Random Forest dan Boosting, performanya masih dibawah prediksi model KNN. Sehingga dapat disimpulkan bahwa pada kasus ini, model dengan menggunakan Algoritma KNN lebih tepat untuk digunakan atau diterapkan.
 
+---
+Penutup
+Demikian hasil dari laporan proyek machine learning tentang Prediktif Analitik Penyakit Gagal Jantung. Bilamana didalam penyampaian serta penjelasan yang kurang berkenaan, saya memohon maaf. Atas waktu dan perhatiannya, saya ucapkan Terima kasih telah membaca laporan ini. Semoga dapat memberi manfaat bagi kita semuanya.

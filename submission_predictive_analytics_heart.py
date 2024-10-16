@@ -13,40 +13,6 @@ Original file is located at
 * ID Dicoding : aflahazzaky
 * Dataset : [Heart Failure Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)
 
-# **Domain Proyek**
-
-Penyakit kardiovaskular (CVD) merupakan penyebab kematian nomor 1 secara global, merenggut sekitar 17,9 juta jiwa setiap tahunnya, atau menyumbang 31% dari seluruh kematian di seluruh dunia. Empat dari kematian 5CVD disebabkan oleh serangan jantung dan stroke, dan sepertiga dari kematian ini terjadi sebelum waktunya pada orang di bawah usia 70 tahun. Gagal jantung adalah kejadian umum yang disebabkan oleh penyakit kardiovaskular dan kumpulan data ini berisi 11 fitur yang dapat digunakan untuk memprediksi kemungkinan penyakit jantung.
-
-Orang dengan penyakit kardiovaskular atau yang memiliki risiko kardiovaskular tinggi (karena adanya satu atau lebih faktor risiko seperti hipertensi, diabetes, hiperlipidemia, atau penyakit yang sudah ada) memerlukan deteksi dan manajemen dini sehingga model pembelajaran mesin dapat sangat membantu.[[1](https://www.kaggle.com/fedesoriano/heart-failure-prediction)]
-
-Penyakit gagal jantung dapat disebabkan oleh beberapa kondisi penyakit jantung. Menurut WHO, penyakit jantung atau yang disingkat sebagai CVD (Cardiovascular disease) adalah kelompok gangguan pada jantung dan pembuluh darah yang termasuk diataranya: coronary heart disease, cerebrovascular disease, rheumatic heart disease, dan kondisi jantung lainnya. Lebih dari 4 dari 5 kematian atas CVD disebabkan oleh gagal jantung dan strokes, dan sepertiga dari angka kematian tersebut merupakan orang yang mati premature dibawah umur 70. Faktor resiko penyakit ini seringnya disebabkan oleh diet yang tidak sehat, kurang berolahraga, serta penggunaan rokok dan alkohol yang berlebih. Sifatnya yang menyerang mendadak menyebabkan dikembangkannya teknologi yang dapat memprevensi. EKG sebagai salah satu teknologi hasil yang dikembangkan berkontribusi memberikan tanda dan informasi akan aktifitas aliran listrik pada jantung.[[2](https://jurnal.unprimdn.ac.id/index.php/JUSIKOM/article/view/2445)]
-
-# **Business Understanding**
-
-### Problem Statements
-
-Berdasarkan latar belakang diatas, berikut ini rumusan masalah yang dapat diselesaikan pada proyek ini:
-- Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
-- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung pada manusia menggunakan machine learning?
-
-### Goals Statements
-
-Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan pada proyek ini:
-- Melakukan pra-pemrosesan data dengan baik agar dapat digunakan dalam pembuatan model.
-- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan rata-rata umur.
-
-### Solution Statements
-
-Berdasarkan tujuan diatas, berikut ini solusi yang dapat diselesaikan pada proyek ini:
-- Untuk pra-pemrosesan data dapat dilakukan dengan beberapa teknik diantaranya:
-   * Melakukan *drop* pada kolom `FastingBS` karena tidak diperlukan dalam analisis data.
-   * Mengatasi masalah data yang kosong dengan cara menghapus beberapa data yang terindikasi kosong yang menyebabkan data statistik bernilai 0.
-   * Melakukan Encoding terhadap kolom yang bertipe data `object`.
-   * Melakukan pembagian dataset menjadi dua bagian dengan rasio 80:20, 80% untuk data latih dan 20% untuk data uji.
-   * Melakukan *Standard Scaler*.
-
-- Untuk penggunaan model dengan algoritma kami uji beberapa algoritma diantaranya Algoritma Random Forest, Algoritma K-Nearest Neighbor, dan Algoritma Boosting.
-
 # **Data Understanding**
 
 Data pada project ini menggunakan data yang bersumber pada sebuah situs kaggle, dimana fokus pada data tersebut menjelaskan faktor-faktor yang akan mempengaruhi sebuah penyakit gagal jantung.[[Kaggle Dataset - Heart Failure Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)]
@@ -290,16 +256,40 @@ for col in cat_features:
 cat_features = df_cleaned.select_dtypes(include=['object']).columns.tolist()
 
 for col in cat_features:
+    sns.catplot(x=col, y="RestingBP", kind="bar", dodge=False, height = 4, aspect = 3,  data=df_cleaned, palette="Set3")
+    plt.title("Average 'RestingBP' Relative to - {}".format(col))
+
+cat_features = df_cleaned.select_dtypes(include=['object']).columns.tolist()
+
+for col in cat_features:
+    sns.catplot(x=col, y="Cholesterol", kind="bar", dodge=False, height = 4, aspect = 3,  data=df_cleaned, palette="Set3")
+    plt.title("Average 'Cholesterol' Relative to - {}".format(col))
+
+cat_features = df_cleaned.select_dtypes(include=['object']).columns.tolist()
+
+for col in cat_features:
     sns.catplot(x=col, y="MaxHR", kind="bar", dodge=False, height = 4, aspect = 3,  data=df_cleaned, palette="Set3")
     plt.title("Average 'MaxHR' Relative to - {}".format(col))
+
+cat_features = df_cleaned.select_dtypes(include=['object']).columns.tolist()
+
+for col in cat_features:
+    sns.catplot(x=col, y="Oldpeak", kind="bar", dodge=False, height = 4, aspect = 3,  data=df_cleaned, palette="Set3")
+    plt.title("Average 'Oldpeak' Relative to - {}".format(col))
+
+cat_features = df_cleaned.select_dtypes(include=['object']).columns.tolist()
+
+for col in cat_features:
+    sns.catplot(x=col, y="HeartDisease", kind="bar", dodge=False, height = 4, aspect = 3,  data=df_cleaned, palette="Set3")
+    plt.title("Average 'HeartDisease' Relative to - {}".format(col))
 
 """### Numerical Features
 
 2. Menampilkan hubungan fitur numerik.
 """
 
-# sns.pairplot(df_cleaned, hue = 'HeartDisease')
-sns.pairplot(df_cleaned, diag_kind = 'kde')
+sns.pairplot(df_cleaned, hue = 'HeartDisease')
+# sns.pairplot(df_cleaned, diag_kind = 'kde')
 
 """### Correlation Matrix
 
@@ -355,8 +345,8 @@ df_cleaned.info()
 * Split dataset menjadi data train dan data test sebelum transformasi (supaya transformasi diterapkan hanya pada data latih)
 """
 
-X = df_cleaned.drop(["Age"],axis =1)
-y = df_cleaned["Age"]
+X = df_cleaned.drop(["HeartDisease"],axis =1)
+y = df_cleaned["HeartDisease"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 123)
 
 print(f'Total # of sample in whole dataset: {len(X)}')
@@ -368,15 +358,14 @@ print(f'Total # of sample in test dataset: {len(X_test)}')
 * Standarisasi fitur dengan cara mengurangi setiap nilai pada kumpulan data dengan nilai rata-rata, kemudian dibagi dengan deviasi standar. Standarisasi ditujukan supaya data tidak memiliki penyimpangan nilai yang besar.
 """
 
-num_features = ['RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'HeartDisease']
+num_features = ['Age','RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
 
 scaler = StandardScaler()
 scaler.fit(X_train[num_features])
 X_train[num_features] = scaler.transform(X_train.loc[:, num_features])
 X_train[num_features].head()
 
-# num_features = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
-num_features = ['RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'HeartDisease']
+num_features = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
 X_train[num_features].describe().round(4)
 
 """Perhatikan tabel di atas, sekarang nilai mean = 0 dan standar deviasi = 1.
@@ -408,6 +397,12 @@ models.loc['train_mse','RandomForest'] = mean_squared_error(y_pred=RF.predict(X_
 boosting = AdaBoostRegressor(learning_rate=0.05, random_state=55)
 boosting.fit(X_train, y_train)
 models.loc['train_mse','Boosting'] = mean_squared_error(y_pred=boosting.predict(X_train), y_true=y_train)
+
+"""## ***Pengujian Model Development***"""
+
+knn_pred = knn.predict(X_test)
+RF_pred = RF.predict(X_test)
+boosting_pred = boosting.predict(X_test)
 
 """# **Model Evaluation**"""
 
@@ -449,10 +444,10 @@ Berikut penjelasan untuk setiap model:
 """
 
 prediksi = X_test.iloc[:1].copy()
-pred_dict = {'y_true':y_test[:1]}
+pred_dict = {'HeartDisease':y_test[:1]}
 for name, model in model_dict.items():
     pred_dict['prediksi_'+name] = model.predict(prediksi).round(1)
 
 pd.DataFrame(pred_dict)
 
-"""Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma Boosting."""
+"""Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma KNN."""
