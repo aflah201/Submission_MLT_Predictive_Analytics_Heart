@@ -198,7 +198,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     
     ![Screenshot 2024-10-17 031140](https://github.com/user-attachments/assets/07199710-d20a-4a24-9072-002e7892e8ed)
     
-    Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
+    Hasil di atas menunjukkan perbandingan nilai **HeartDisease** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
     
       * **`HeartDisease`**: Nilai asli adalah **0**.
       * **`prediksi_KNN`**: Model **KNN** memprediksi **0.4**.
