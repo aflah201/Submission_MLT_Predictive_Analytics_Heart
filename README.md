@@ -14,13 +14,13 @@ Penyakit gagal jantung dapat disebabkan oleh beberapa kondisi penyakit jantung. 
 
 Berdasarkan latar belakang diatas, berikut ini rumusan masalah yang dapat diselesaikan pada proyek ini:
 - Bagaimana cara melakukan pra-pemrosesan pada data penyakit gagal jantung yang akan digunakan untuk membuat model yang baik?
-- Bagaimana cara membuat model untuk memprediksi penyakit gagal jantung pada manusia menggunakan machine learning?
+- Bagaimana memprediksi resiko gagal jantung melalui faktor resiko Usia?
 
 ### Goals Statements
 
 Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan pada proyek ini:
 - Melakukan pra-pemrosesan data dengan baik agar dapat digunakan dalam pembuatan model.
-- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan rata-rata umur.
+- mengetahui cara membuat model machine learning untuk memprediksi penyakit gagal jantung pada manusia berdasarkan faktor usia.
 
 ### Solution Statements
 
@@ -47,22 +47,23 @@ Kategori | Health, Health Conditions, Classification, Heart Conditions, Healthca
 Jenis dan Ukuran Berkas | CSV (35.92 kB)
 
 Pada berkas yang diunduh yakni heart.csv berisi 918 rows x 12 columns. Kolom-kolom tersebut berisi diantaranya 1 kolom berisi tipe data `float64`, 6 kolom berisi tipe data `int64`, dan 5 kolom berisi tipe data `object`. Untuk penjelasan mengenai variabel dapat dilihat sebagai berikut:
-1. **Age**: usia pasien dalam jumlah tahun dengan tipe data `int64`
-2. **Sex**: jenis kelamin pasien dengan kategori M = Male/Pria dan F = Female/Perempuan dengan tipe data object
-3. **ChestPainType**: jenis nyeri dada dengan kategori TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic dengan tipe data object
+Variable | Keterangan | Tipe Data
+**Age** | Usia pasien dalam jumlah tahun | `int64`
+**Sex** | Jenis kelamin pasien dengan kategori M = Male/Pria dan F = Female/Perempuan | `object`
+**ChestPainType** | Jenis nyeri dada dengan kategori TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic | `object`
    - *Typical Angina* adalah nyeri dada yang disebabkan oleh aktivitas fisik atau stres emosional, dan berkurang saat istirahat atau mengonsumsi nitrogliserin.
    - *Atypical Angina* adalah nyeri dada yang tidak memenuhi kriteria angina tipikal, tetapi sesuai dengan penyebab iskemik jantung.
    - *Non-Anginal Pain* adalah nyeri dada yang tidak disebabkan oleh penyakit jantung.
    - *Asymptomatic* adalah istilah yang menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun.
-4. **RestingBP**: tekanan darah istirahat dengan tipe data `int64`.
-5. **Cholesterol**: kolesterol serum dengan tipe data `int64`.
-6. **FastingBS**: gula darah puasa dengan tipe data `int64`.
-7. **RestingECG**: hasil elektrokardiogram istirahat dengan kategori Normal, ST = Mengalami kelainan gelombang ST-T, LVH = menunjukkan kemungkinan atau pasti hipertrofi ventrikel kiri dengan tipe data `object`.
-8. **MaxHR**: detak jantung maksimum tercapai dengan tipe data `int64` yang berisi nilai numerik antara 60 dan 202.
-9. **ExerciseAngina**: angina akibat olahraga dengan kategori Y = Yes/Iya & N = No/Tidak bertipe data `object`.
-10. **Oldpeak**: puncak tua nilai numerik yang diukur pada depresi bertipe data `float64`.
-11. **ST_Slope**: kemiringan segmen ST terhadap denyut jantung (heart rate) yang dihitung dengan linear regression dengan kategori Up: upsloping, Flat: flat, Down: downsloping bertipe data `object`.
-12. **HeartDisease**: penyakit jantung dengan hasil keluaran 1 = penyakit jantung dan 0 = normal bertipe data `int64`.
+**RestingBP** | Tekanan darah istirahat | `int64`
+**Cholesterol** | Kolesterol serum | `int64`
+**FastingBS** | Gula darah puasa | `int64`
+**RestingECG** | Hasil elektrokardiogram istirahat dengan kategori Normal, ST = Mengalami kelainan gelombang ST-T, LVH = menunjukkan kemungkinan atau pasti hipertrofi ventrikel kiri | `object`.
+**MaxHR** | Detak jantung maksimum tercapai yang berisi nilai numerik antara 60 dan 202 | `int64`
+**ExerciseAngina** | Angina akibat olahraga dengan kategori Y = Yes/Iya & N = No/Tidak | `object`
+**Oldpeak** | Puncak tua nilai numerik yang diukur pada depresi | `float64`
+**ST_Slope** | Kemiringan segmen ST terhadap denyut jantung (heart rate) yang dihitung dengan linear regression dengan kategori Up: upsloping, Flat: flat, Down: downsloping | `object`
+**HeartDisease** | Penyakit jantung dengan hasil keluaran 1 = penyakit jantung dan 0 = normal | `int64`
 
 ## Data Loading
 ---
@@ -79,18 +80,7 @@ Berikut adalah tahapan dalam melakukan data loading:
 Berikut adalah tahapan dalam melakukan exploratory data analysis:
 - Mendeskripsikan variabel dan statistika.
   * Menggunakan kode `df.info()` untuk menghasilkan deskripsi variabel, dan `df.describe()` untuk menhasilkan nilai statistik pada dataset.
-- Menangani data nilai yang hilang.
-  ```
-  RestingBP = (df.RestingBP == 0).sum()
-  Cholesterol = (df.Cholesterol == 0).sum()
-  print(f'Jumlah nilai 0 pada RestingBP: {RestingBP}')
-  print(f'Jumlah nilai 0 pada Cholesterol: {Cholesterol}')
-  ```
-  ```
-  df.drop(df.loc[(df['RestingBP']==0)].index, inplace=True)
-  df.drop(df.loc[(df['Cholesterol']==0)].index, inplace=True)
-  df.shape
-  ```
+- Menangani data nilai yang hilang dengan menghapus beberapa kolom yang terdeteksi nilai 0.
 - Membatasi nilai outliers.
   * Jika ada nilai yang lebih kecil dari (Q1 - 1.5 * IQR) atau lebih besar dari (Q3 + 1.5 * IQR), maka baris tersebut dianggap sebagai outlier. Simbol ~ digunakan untuk membalik kondisi tersebut, sehingga hanya baris yang tidak memiliki outliers yang akan disimpan. Memastikan bahwa jika ada satu saja nilai yang outlier dalam sebuah baris, maka seluruh baris tersebut akan di-drop.
 - Menganalisis data kategori dan numerik dengan cara menampilkan plot analisis data.
