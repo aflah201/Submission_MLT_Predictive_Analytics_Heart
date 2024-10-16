@@ -136,7 +136,7 @@ Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopme
 
 ---
 ## Evaluation
-<<<<<<< HEAD
+
 Setelah melakukan model developmenet testing pada data, langkah selanjutnya adalah *Evaluation* terhadap data, diantaranya sebagai berikut:
 1. Menampilkan hasil komparasi dari ketiga algoritma **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting**.
    
@@ -178,6 +178,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
 2. Menampilkan hasil evaluasi MSE
 
 Berikut hasil dari pengukuran model:
+
 ![download](https://github.com/user-attachments/assets/e0b581c7-4319-47bf-b7d9-b5f612067581)
 
 Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Random Forest (RF), K-Nearest Neighbors (KNN), dan Boosting. Grafik tersebut membandingkan performa model pada data training dan testing dalam bentuk bar horizontal. Berikut penjelasan dari setiap model:
@@ -194,29 +195,8 @@ Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Rand
 Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
 
 Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
+
 ![Screenshot 2024-10-15 214136](https://github.com/user-attachments/assets/f902514e-0851-4659-b01d-f72c4e4b6aad)
-=======
-Pada proyek ini, model dikembangan dengan kasus Regresi. Berikut hasil dari pengukuran model:
-
-![download](https://github.com/user-attachments/assets/edc5d843-ef28-4976-9e04-321b8557ec9b)
-
-Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Random Forest (RF), K-Nearest Neighbors (KNN), dan Boosting. Grafik tersebut membandingkan performa model pada data training dan testing dalam bentuk bar horizontal. Berikut penjelasan dari setiap model:
-
-1. **Boosting**:
-   - Performa pada data training (warna biru) dan testing (warna oranye) sangat mirip dan tinggi, menunjukkan bahwa model ini memiliki kemampuan generalisasi yang baik. Tidak ada tanda overfitting atau underfitting yang signifikan.
-
-2. **KNN**:
-   - Performa pada data training dan testing hampir sama seperti Boosting. Nilai pada kedua dataset ini juga tinggi dan konsisten. Hal ini menunjukkan bahwa KNN cukup efektif dalam memprediksi data baru tanpa overfitting.
-
-3. **Random Forest (RF)**:
-   - Pada model ini, terlihat perbedaan yang cukup signifikan antara performa pada data training dan testing. Performa pada data training jauh lebih rendah dibandingkan dengan testing, yang mungkin menunjukkan bahwa model ini mengalami underfitting atau memiliki performa yang kurang optimal pada data training.
-
-Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
-
-Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma KNN & Boosting dengan hasil akhir sebagai berikut.
-
-![{483E3751-D453-4416-BB0A-882209A151FE}](https://github.com/user-attachments/assets/9a2da6cd-0f68-473c-af16-43bf03730a92)
->>>>>>> f342df6bc1c47b241f51dc72d9b25dea81069e01
 
 Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
 
@@ -232,20 +212,20 @@ Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi m
 
 Hasil plot di atas menunjukkan matriks kebingungan (confusion matrix) dari tiga model klasifikasi yang berbeda: KNN, Random Forest, dan Boosting. Setiap matriks menggambarkan seberapa baik masing-masing model memprediksi kelas data berdasarkan data aktual. Berikut penjelasan dari setiap plot:
 
-  1. **KNN Confusion Matrix (Merah)**:
-    - Matriks ini menunjukkan bahwa model KNN memprediksi dengan benar sebanyak **65** kasus untuk kelas 0 dan **10** kasus untuk kelas 1.
-    - Namun, model ini juga salah memprediksi sebanyak **4** kasus dari kelas 0 menjadi kelas 1 dan **60** kasus dari kelas 1 menjadi kelas 0.
-    - Ini menunjukkan bahwa model KNN memiliki performa yang tidak terlalu baik, terutama dalam memprediksi kelas 1, karena banyak prediksi salah pada kelas tersebut.
+    1. **KNN Confusion Matrix (Merah)**:
+      - Matriks ini menunjukkan bahwa model KNN memprediksi dengan benar sebanyak **65** kasus untuk kelas 0 dan **10** kasus untuk kelas 1.
+      - Namun, model ini juga salah memprediksi sebanyak **4** kasus dari kelas 0 menjadi kelas 1 dan **60** kasus dari kelas 1 menjadi kelas 0.
+      - Ini menunjukkan bahwa model KNN memiliki performa yang tidak terlalu baik, terutama dalam memprediksi kelas 1, karena banyak prediksi salah pada kelas tersebut.
 
-  2. **Random Forest Confusion Matrix (Hijau)**:
-    - Matriks ini menunjukkan bahwa model Random Forest memprediksi dengan benar sebanyak **59** kasus untuk kelas 0 dan **41** kasus untuk kelas 1.
-    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **29** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
-    - Model ini memiliki akurasi yang lebih baik dibandingkan KNN, terutama karena lebih sedikit kesalahan dalam memprediksi kelas 1.
+    2. **Random Forest Confusion Matrix (Hijau)**:
+      - Matriks ini menunjukkan bahwa model Random Forest memprediksi dengan benar sebanyak **59** kasus untuk kelas 0 dan **41** kasus untuk kelas 1.
+      - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **29** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+      - Model ini memiliki akurasi yang lebih baik dibandingkan KNN, terutama karena lebih sedikit kesalahan dalam memprediksi kelas 1.
 
-  3. **Boosting Confusion Matrix (Biru)**:
-    - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
-    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
-    - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
+    3. **Boosting Confusion Matrix (Biru)**:
+      - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
+      - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+      - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
 
 **Kesimpulan**: Dari ketiga model di atas, **Boosting** memiliki performa terbaik dengan jumlah prediksi benar yang paling tinggi dan jumlah kesalahan yang paling rendah. Model **Random Forest** berada di posisi kedua, sementara **KNN** memiliki performa yang paling rendah, terutama dalam memprediksi kelas 1.
 
