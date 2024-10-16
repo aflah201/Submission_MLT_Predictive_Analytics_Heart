@@ -196,7 +196,7 @@ Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan st
 
 Hasil prediksi yang paling mendekati nilai asli didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
 
-![Screenshot 2024-10-15 214136](https://github.com/user-attachments/assets/f902514e-0851-4659-b01d-f72c4e4b6aad)
+
 
 Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
 
@@ -209,6 +209,8 @@ Kita dapat melihat bahwa model dengan algoritma KNN memiliki hasil prediksi 0.4,
 Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi model **KNN** paling mendekati (0.4).
 
 3. Menampilkan hasil evaluasi classifier
+
+
 
 Hasil plot di atas menunjukkan matriks kebingungan (confusion matrix) dari tiga model klasifikasi yang berbeda: KNN, Random Forest, dan Boosting. Setiap matriks menggambarkan seberapa baik masing-masing model memprediksi kelas data berdasarkan data aktual. Berikut penjelasan dari setiap plot:
 
@@ -224,8 +226,8 @@ Hasil plot di atas menunjukkan matriks kebingungan (confusion matrix) dari tiga 
 
   - **Boosting Confusion Matrix (Biru)**:
     - Pada model Boosting, sebanyak **59** kasus dari kelas 0 dan **58** kasus dari kelas 1 diprediksi dengan benar.
-      - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
-      - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
+    - Kesalahan terjadi pada **10** kasus dari kelas 0 yang diprediksi menjadi kelas 1 dan **12** kasus dari kelas 1 yang diprediksi menjadi kelas 0.
+    - Ini adalah model yang paling akurat di antara ketiga model tersebut, dengan distribusi kesalahan yang lebih sedikit, terutama dalam memprediksi kelas 1.
 
 **Kesimpulan**: Dari ketiga model di atas, **Boosting** memiliki performa terbaik dengan jumlah prediksi benar yang paling tinggi dan jumlah kesalahan yang paling rendah. Model **Random Forest** berada di posisi kedua, sementara **KNN** memiliki performa yang paling rendah, terutama dalam memprediksi kelas 1.
 
