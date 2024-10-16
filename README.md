@@ -127,7 +127,8 @@ Berikut penjelasan untuk setiap model:
    - Ini menunjukkan model kurang cocok untuk dataset ini atau mungkin terlalu sederhana untuk menangkap pola yang ada.
 
 Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma Boosting dengan hasil akhir sebagai berikut.
-![Screenshot 2024-10-15 214136](https://github.com/user-attachments/assets/f902514e-0851-4659-b01d-f72c4e4b6aad)
+
+![{483E3751-D453-4416-BB0A-882209A151FE}](https://github.com/user-attachments/assets/9a2da6cd-0f68-473c-af16-43bf03730a92)
 
 Hasil di atas menunjukkan perbandingan nilai **asli** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
 
@@ -140,9 +141,9 @@ Kita dapat melihat bahwa model dengan algoritma KNN memiliki hasil prediksi 0.4,
 Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi model **KNN** paling mendekati (0.4).
 
 ---
-Kesimpulan
+## Kesimpulan
 Pengujian setiap model dengan algoritma yang berbeda menghasilkan nilai prediksi yang berbeda pula. Model dengan nilai yang mendekati nilai sebenarnya diperoleh pada prediksi dengan menggunakan algoritma KNN. Untuk prediksi menggunakan algoritma Random Forest dan Boosting, performanya masih dibawah prediksi model KNN. Sehingga dapat disimpulkan bahwa pada kasus ini, model dengan menggunakan Algoritma KNN lebih tepat untuk digunakan atau diterapkan.
 
 ---
-Penutup
+## Penutup
 Demikian hasil dari laporan proyek machine learning tentang Prediktif Analitik Penyakit Gagal Jantung. Bilamana didalam penyampaian serta penjelasan yang kurang berkenaan, saya memohon maaf. Atas waktu dan perhatiannya, saya ucapkan Terima kasih telah membaca laporan ini. Semoga dapat memberi manfaat bagi kita semuanya.
