@@ -26,17 +26,17 @@ Berdasarkan rumusan masalah diatas, berikut ini tujuan yang dapat diselesaikan p
 
 Berdasarkan tujuan diatas, berikut ini solusi yang dapat diselesaikan pada proyek ini:
 1. **Solusi untuk Melakukan Pra-Pemrosesan Data Penyakit Gagal Jantung**:
-  - Lakukan **pembersihan data** untuk mengatasi data yang hilang, duplikat, atau data yang tidak valid. Ini bisa dilakukan dengan teknik imputasi atau penghapusan baris/kolom yang tidak relevan.
-  - **Normalisasi atau standarisasi** fitur numerik seperti Usia, Tekanan Darah, Kolesterol, dan Detak Jantung untuk memastikan bahwa skala variabel tidak mempengaruhi model.
-  - Lakukan **pemeriksaan dan penanganan outlier** pada variabel-variabel numerik untuk menghindari pengaruh negatif terhadap performa model.
-  - Gunakan **teknik encoding** untuk mengubah variabel kategorikal menjadi numerik sehingga bisa diproses oleh algoritma machine learning.
-  - Pisahkan data menjadi **set training dan set testing** untuk melatih dan menguji model
-  - Melakukan **Standard Scaler**
+    - Lakukan **pembersihan data** untuk mengatasi data yang hilang, duplikat, atau data yang tidak valid. Ini bisa dilakukan dengan teknik imputasi atau penghapusan baris/kolom yang tidak relevan.
+    - **Normalisasi atau standarisasi** fitur numerik seperti Usia, Tekanan Darah, Kolesterol, dan Detak Jantung untuk memastikan bahwa skala variabel tidak mempengaruhi model.
+    - Lakukan **pemeriksaan dan penanganan outlier** pada variabel-variabel numerik untuk menghindari pengaruh negatif terhadap performa model.
+    - Gunakan **teknik encoding** untuk mengubah variabel kategorikal menjadi numerik sehingga bisa diproses oleh algoritma machine learning.
+    - Pisahkan data menjadi **set training dan set testing** untuk melatih dan menguji model
+    - Melakukan **Standard Scaler**
 
 2. **Solusi untuk Mengembangkan Model Prediksi Risiko Gagal Jantung**:
-  - Pilih algoritma machine learning yang cocok, misalnya **K-Nearest_Neighbor**, **Random Forest**, atau **Boosting**, untuk membangun model prediksi berdasarkan faktor risiko yang telah ditentukan.
-  - **Latih model** menggunakan set data yang telah diproses, dan lakukan optimasi hyperparameter menggunakan teknik seperti **Random Search** untuk mendapatkan konfigurasi terbaik.
-  - Evaluasi model menggunakan **metrik evaluasi** seperti akurasi, precision, recall, F1-score untuk menentukan performa model dalam memprediksi risiko gagal jantung.
+    - Pilih algoritma machine learning yang cocok, misalnya **K-Nearest_Neighbor**, **Random Forest**, atau **Boosting**, untuk membangun model prediksi berdasarkan faktor risiko yang telah ditentukan.
+    - **Latih model** menggunakan set data yang telah diproses, dan lakukan optimasi hyperparameter menggunakan teknik seperti **Random Search** untuk mendapatkan konfigurasi terbaik.
+    - Evaluasi model menggunakan **metrik evaluasi** seperti akurasi, precision, recall, F1-score untuk menentukan performa model dalam memprediksi risiko gagal jantung.
 
 ---
 ## Data Understanding
