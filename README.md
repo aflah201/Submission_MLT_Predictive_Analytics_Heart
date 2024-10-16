@@ -108,25 +108,23 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling
 ---
 ## Evaluation
 Pada proyek ini, model dikembangan dengan kasus Regresi. Berikut hasil dari pengukuran model:
-![download](https://github.com/user-attachments/assets/e0b581c7-4319-47bf-b7d9-b5f612067581)
 
-Grafik di atas menunjukkan perbandingan performa tiga model prediksi: **Boosting**, **Random Forest (RF)**, dan **K-Nearest Neighbors (KNN)**. Nilai yang dibandingkan adalah **Mean Squared Error (MSE)**—semakin kecil MSE, semakin akurat prediksi model tersebut.
+![download](https://github.com/user-attachments/assets/edc5d843-ef28-4976-9e04-321b8557ec9b)
 
-Berikut penjelasan untuk setiap model:
+Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Random Forest (RF), K-Nearest Neighbors (KNN), dan Boosting. Grafik tersebut membandingkan performa model pada data training dan testing dalam bentuk bar horizontal. Berikut penjelasan dari setiap model:
 
-1. **Boosting**  
-   - Nilai kesalahan (MSE) pada data latih (*train set*) lebih rendah daripada pada data uji (*test set*), tapi perbedaannya tidak terlalu jauh.  
-   - Ini menunjukkan model cukup mampu memahami pola data dan **tidak mengalami overfitting** (yaitu kondisi di mana model terlalu baik di data latih tapi buruk di data baru).
+1. **Boosting**:
+   - Performa pada data training (warna biru) dan testing (warna oranye) sangat mirip dan tinggi, menunjukkan bahwa model ini memiliki kemampuan generalisasi yang baik. Tidak ada tanda overfitting atau underfitting yang signifikan.
 
-2. **Random Forest (RF)**  
-   - MSE di data latih sangat rendah, tapi di data uji jauh lebih tinggi.  
-   - Ini menandakan model mengalami **overfitting**—terlalu baik di data latih tapi kesulitan menangani data baru.
+2. **KNN**:
+   - Performa pada data training dan testing hampir sama seperti Boosting. Nilai pada kedua dataset ini juga tinggi dan konsisten. Hal ini menunjukkan bahwa KNN cukup efektif dalam memprediksi data baru tanpa overfitting.
 
-3. **KNN (K-Nearest Neighbors)**  
-   - MSE cukup tinggi di kedua data (latih dan uji).  
-   - Ini menunjukkan model kurang cocok untuk dataset ini atau mungkin terlalu sederhana untuk menangkap pola yang ada.
+3. **Random Forest (RF)**:
+   - Pada model ini, terlihat perbedaan yang cukup signifikan antara performa pada data training dan testing. Performa pada data training jauh lebih rendah dibandingkan dengan testing, yang mungkin menunjukkan bahwa model ini mengalami underfitting atau memiliki performa yang kurang optimal pada data training.
 
-Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma Boosting dengan hasil akhir sebagai berikut.
+Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
+
+Dari hasil prediksi yang paling mendekati nilai asli didapatkan oleh Algoritma KNN & Boosting dengan hasil akhir sebagai berikut.
 
 ![{483E3751-D453-4416-BB0A-882209A151FE}](https://github.com/user-attachments/assets/9a2da6cd-0f68-473c-af16-43bf03730a92)
 
