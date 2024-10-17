@@ -160,6 +160,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
 
    Berdasarkan tabel komparasi di atas, berikut adalah penjelasan dari hasil evaluasi tiga algoritma, yaitu **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting**:
     - **KNN (K-Nearest Neighbors)**
+      
       Keterangan | Nilai
       **Akurasi:** | 89.21%  
       **Presisi:** | 89.86%  
@@ -169,6 +170,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
       **KNN** menunjukkan kinerja tertinggi secara keseluruhan. Akurasi dan F1-Score yang lebih tinggi menandakan bahwa KNN mampu memprediksi kelas dengan baik dan seimbang antara precision dan recall.
 
     - **RF (Random Forest)**
+      
       Keterangan | Nilai
       **Akurasi:** | 88.49%  
       **Presisi:** | 87.50%  
@@ -178,6 +180,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
       **Random Forest** memiliki **Recall** paling tinggi (90%). Ini berarti RF lebih baik dalam mengidentifikasi kasus positif dengan benar, namun sedikit kalah dalam akurasi dan F1-Score dibandingkan KNN. Jika aplikasi memerlukan fokus pada deteksi positif yang tinggi (misalnya deteksi penyakit), RF bisa menjadi pilihan yang baik.
 
     - **Boosting**
+      
       Keterangan | Nilai
       **Akurasi:** | 84.17%  
       **Presisi:** | 88.71%  
