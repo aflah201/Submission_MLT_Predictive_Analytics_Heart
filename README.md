@@ -69,32 +69,12 @@ Variable | Keterangan | Tipe Data
 **ST_Slope** | Kemiringan segmen ST terhadap denyut jantung (heart rate) yang dihitung dengan linear regression dengan kategori Up: upsloping, Flat: flat, Down: downsloping | `object`
 **HeartDisease** | Penyakit jantung dengan hasil keluaran 1 = penyakit jantung dan 0 = normal | `int64`
 
----
-## Data Loading
-Berikut adalah tahapan dalam melakukan data loading:
-- Menginstall dan import library yang diperlukan seperti:
-  * *Libray* Numpy digunakan untuk memproses larik atau array.
-  * *Libray* Matplotlib digunakan membuat visualisasi data dalam dua dimensi.
-  * *Libray* Seaborn dibangun di ata *library* Matplotlib, digunakan untuk membuat visualisasi data.
-  * *Libray* Pandas digunakan untuk menganalisis dan memanipulasi data.
-- Menginstall Kaggle & unduh dataset.
-
----
-## Exploratory Data Analysis
-Berikut adalah tahapan dalam melakukan exploratory data analysis:
-- Membersihkan data yang terindikasi berisi nilai 0 dengan cara menghapus kolom yang dipilih, pada dataset ditemukan nilai kosong pada tabel `RestingBP` berjumlah 1 data, dan pada tabel `Cholesterol` berjumlah 172 data.
-- Menghapus kolom yang tidak diperlukan dalam analisis pada dataset, dalam kasus ini terdapat kolom `FastingBS`.
-- Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier menggunakan metode IQR.
-- Membagi dua bagian untuk fitur kategori dan fitur numerik.
-- Menampilkan plot kategori dan numerik.
-- Mengecek rata-rata terhadap fitur kategori.
-- Menampilkan hubungan fitur numerik.
-- Menampilkan korelasi matriks untuk fitur numerik.
+Berikut informasi mengenai jumlah data, tipe data, data statisika, dan informasi data hilang (missing value) yang terdapat pada dataset ini:
 
 ---
 ## Data Preparation
 Berikut adalah tahapan dalam melakukan data preparation:
-- Mengatasi nilai yang kosong dengan cara menghitung kolom yang kosong, lalu menghapus kolom yang dipilih dengan ketentuan yang bernilai kosong.
+- Pada dataset ditemukan nilai kosong pada tabel `RestingBP` berjumlah 1 data, dan pada tabel `Cholesterol` berjumlah 172 data, untuk mengatasi nilai yang kosong dengan cara menghitung kolom yang kosong, lalu menghapusnya.
   ```
   RestingBP = (df.RestingBP == 0).sum()
   Cholesterol = (df.Cholesterol == 0).sum()
@@ -105,19 +85,26 @@ Berikut adalah tahapan dalam melakukan data preparation:
   df.drop(df.loc[(df['RestingBP']==0)].index, inplace=True)
   df.drop(df.loc[(df['Cholesterol']==0)].index, inplace=True)
   ```
-- Menghapus kolom yang tidak diperlukan dalam analisis data.
+- Menghapus kolom yang tidak diperlukan dalam analisis data, dalam kasus ini terdapat kolom `FastingBS`.
   ```
   df.drop(['FastingBS'], axis=1, inplace=True)
   ```
+- Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier menggunakan metode IQR.
+  - **sns.boxplot**, untuk mendeteksi adanya data yang berada di luar batas atas dan batas bawah data (outliers).
+
+- Menampilkan plot kategori untuk data yang bertipe `object`.
+
+- Menampilkan plot numerik untuk data yang bertipe `int64` dan `float64`.
+
+- Menampilkan plot untuk mempertimbangkan Fitur Numerik dengan Fitur Kategori.
+  - **sns.catplot**, untuk menampilkan Fitur HeartDisease.
+
+- Menampilkan plot untuk mengetahui hubungan fitur numerik.
+  - **sns.pairplot**, untuk menampilkan hubungan fitur yang bertipe data `int64` dan `float64`.
+
+- Menampilkan Korelasi Metrik untuk fitur numerik.
+
 - Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik, setelah selesai membuat fitur encoding jangan lupa untuk menghapus kolom yang bertipe data `object` dikarenakan sudah diubah menjadi data numerik.
-  ```
-  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['Sex'], prefix='Sex', dtype='int')], axis=1)
-  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ChestPainType'], prefix='ChestPainType', dtype='int')], axis=1)
-  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['RestingECG'], prefix='RestingECG', dtype='int')], axis=1)
-  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ExerciseAngina'], prefix='ExerciseAngina', dtype='int')], axis=1)
-  df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['ST_Slope'], prefix='ST_Slope', dtype='int')], axis=1)
-  df_cleaned.drop(['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope'], axis=1, inplace=True)
-  ```
 - Membagi dataset 80% untuk data latih, 20% untuk data uji.
   ```
   X = df_cleaned.drop(["HeartDisease"],axis =1)
