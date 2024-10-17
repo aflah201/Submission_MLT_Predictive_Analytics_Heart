@@ -52,7 +52,7 @@ Lisensi | Open Database
 Kategori | Health, Health Conditions, Classification, Heart Conditions, Healthcare
 Jenis dan Ukuran Berkas | CSV (35.92 kB)
 
-Pada berkas yang diunduh yakni heart.csv berisi 918 rows x 12 columns. Kolom-kolom tersebut berisi diantaranya 1 kolom berisi tipe data `float64`, 6 kolom berisi tipe data `int64`, dan 5 kolom berisi tipe data `object`. Untuk penjelasan mengenai variabel dapat dilihat sebagai berikut:
+Pada berkas yang diunduh yakni heart.csv berisi 918 baris x 12 kolom. Kolom-kolom tersebut berisi diantaranya 1 kolom berisi tipe data `float64`, 6 kolom berisi tipe data `int64`, dan 5 kolom berisi tipe data `object`. Untuk penjelasan mengenai variabel dapat dilihat sebagai berikut:
 
 Variable | Keterangan | Tipe Data
 --- | --- | ---
@@ -82,17 +82,10 @@ Berikut adalah tahapan dalam melakukan data loading:
 ---
 ## Exploratory Data Analysis
 Berikut adalah tahapan dalam melakukan exploratory data analysis:
-- Membersihkan data yang terindikasi berisi nilai 0 dengan cara menghapus kolom yang dipilih.
-- Menghapus kolom yang tidak diperlukan dalam analisis seperti kolom `FastingBS`.
-- Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier.
-  ```
-  df_numeric = df.select_dtypes(include=[np.number])
-  Q1 = df_numeric.quantile(0.25)
-  Q3 = df_numeric.quantile(0.75)
-  IQR=Q3-Q1
-  df_cleaned=df[~((df_numeric<(Q1-1.5*IQR))|(df_numeric>(Q3+1.5*IQR))).any(axis=1)]
-  ```
-- Membagi dua bagian untuk fitur kategori untuk data `['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']` dan fitur numerik untuk data `['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak', 'HeartDisease']`.
+- Membersihkan data yang terindikasi berisi nilai 0 dengan cara menghapus kolom yang dipilih, pada dataset ditemukan nilai kosong pada tabel `RestingBP` berjumlah 1 data, dan pada tabel `Cholesterol` berjumlah 172 data.
+- Menghapus kolom yang tidak diperlukan dalam analisis pada dataset, dalam kasus ini terdapat kolom `FastingBS`.
+- Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier menggunakan metode IQR.
+- Membagi dua bagian untuk fitur kategori dan fitur numerik.
 - Menampilkan plot kategori dan numerik.
 - Mengecek rata-rata terhadap fitur kategori.
 - Menampilkan hubungan fitur numerik.
@@ -101,6 +94,21 @@ Berikut adalah tahapan dalam melakukan exploratory data analysis:
 ---
 ## Data Preparation
 Berikut adalah tahapan dalam melakukan data preparation:
+- Mengatasi nilai yang kosong dengan cara menghitung kolom yang kosong, lalu menghapus kolom yang dipilih dengan ketentuan yang bernilai kosong.
+  ```
+  RestingBP = (df.RestingBP == 0).sum()
+  Cholesterol = (df.Cholesterol == 0).sum()
+
+  df.loc[(df['RestingBP']==0)]
+  df.loc[(df['Cholesterol']==0)]
+
+  df.drop(df.loc[(df['RestingBP']==0)].index, inplace=True)
+  df.drop(df.loc[(df['Cholesterol']==0)].index, inplace=True)
+  ```
+- Menghapus kolom yang tidak diperlukan dalam analisis data.
+  ```
+  df.drop(['FastingBS'], axis=1, inplace=True)
+  ```
 - Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik, setelah selesai membuat fitur encoding jangan lupa untuk menghapus kolom yang bertipe data `object` dikarenakan sudah diubah menjadi data numerik.
   ```
   df_cleaned = pd.concat([df_cleaned, pd.get_dummies(df_cleaned['Sex'], prefix='Sex', dtype='int')], axis=1)
@@ -112,24 +120,30 @@ Berikut adalah tahapan dalam melakukan data preparation:
   ```
 - Membagi dataset 80% untuk data latih, 20% untuk data uji.
   ```
-  X = df_cleaned.drop(["Age"],axis =1)
-  y = df_cleaned["Age"]
+  X = df_cleaned.drop(["HeartDisease"],axis =1)
+  y = df_cleaned["HeartDisease"]
   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 123)
   ```
-  pada sumbu X gunakan seluruh dataset kecuali `Age`, dan pada sumbu Y kita menggunakan dataset `Age` sebagai data yang akan di analisis.
+  pada sumbu X gunakan seluruh dataset kecuali `HeartDisease`, dan pada sumbu Y kita menggunakan dataset `HeartDisease` sebagai data yang akan di analisis.
 - Melakukan standarisasi, hal ini dilakukan untuk membuat semua fitur berada dalam skala data yang sama yaitu dengan range 0-1
 
 ---
-## Modeling
-Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Modeling* terhadap data, dengan menggunakan beberapa algoritma, diantaranya sebagai berikut:
+## Model Development
+Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Model Development* terhadap data, dengan menggunakan beberapa algoritma, diantaranya sebagai berikut:
 - Membuat dataframe untuk analisis model.
-- Membuat model dengan Algoritma K-Nearest Neighbor.
-  - Algoritma k-Nearest Neighbor adalah algoritma supervised learning dimana hasil dari instance yang baru diklasikasikan berdasarkan mayoritas dari kategori k-tetangga terdekat. Tujuan dari algoritma ini adalah untuk mengklasikasikan obyek baru berdasarkan atribut dan sample-sample dari training data. Algoritma k-Nearest Neighbor menggunakan Neighborhood Classication sebagai nilai prediksi dari nilai instance yang baru.[[3](https://www.researchgate.net/profile/Asep-Ismail-3/publication/330840826_Cara_Kerja_Algoritma_k-Nearest_Neighbor_k-NN/links/5c56f8d9458515a4c7553b2b/Cara-Kerja-Algoritma-k-Nearest-Neighbor-k-NN.pdf)]
-- Membuat model dengan Algoritma Random Forest.
-  - Random Forest adalah pengembangan dari metode Decision Tree yang menggunakan beberapa Decision Tree, dimana setiap Decision Tree telah dilakukan pelatihan menggunakan sampel individu dan setiap atribut dipecah pada pohon yang dipilih antara atribut subset yang bersifat acak. Random Forest memiliki beberapa kelebihan, yaitu dapat meningkatkan hasil akurasi jika terdapat data yang hilang, dan untuk resisting outliers, serta efisien untuk penyimpanan sebuah data. Selain itu, Random Forest mempunyai proses seleksi fitur dimana mampu mengambil fitur terbaik sehingga dapat meningkatkan performa terhadap model klasifikasi. Dengan adanya seleksi fitur tentu Random Forest dapat bekerja pada big data dengan parameter yang kompleks secara efektif.[[4](https://journal.stekom.ac.id/index.php/Bisnis/article/download/247/182)]
-- Membuat model dengan Algortima Boosting.
-  - Adaptive boosting (adaboost) merupakan salah satu dari beberapa varian pada algoritma boosting. Adaboost merupakan ensemble learning yang sering digunakan pada algoritma boosting Boosting bisa dikombinasikan dengan classifier algoritma yang lain untuk meningkatkan performa klasifikasi. Tentunya secara intuitif, penggabungan beberapa model akan membantu jika model tersebut berbeda satu sama lain. Adaboost dan variannya telah sukses diterapkan pada beberapa bidang (domain) karena dasar teorinya yang kuat, presdiksi yang akurat, dan kesederhanaan yang besar. [[5](https://ejournal.poltekharber.ac.id/index.php/informatika/article/view/5675/2640)]
-- Implementasi Random Search untuk mengetahui parameter terbaik dan nilai terbaik.
+  ```
+  models = pd.DataFrame(index=['train_mse', 'test_mse'],
+                        columns=['KNN', 'RandomForest', 'Boosting'])
+  ```
+- Membuat Model MSE (Mean Squared Error) & Classifier
+  - ***Membuat model dengan Algoritma K-Nearest Neighbor.***
+    Algoritma k-Nearest Neighbor adalah algoritma supervised learning dimana hasil dari instance yang baru diklasikasikan berdasarkan mayoritas dari kategori k-tetangga terdekat. Tujuan dari algoritma ini adalah untuk mengklasikasikan obyek baru berdasarkan atribut dan sample-sample dari training data. Algoritma k-Nearest Neighbor menggunakan Neighborhood Classication sebagai nilai prediksi dari nilai instance yang baru. Cara kerja dari Algoritma ini bekerja dengan mencari sejumlah tetangga terdekat (n_neighbors) dari data yang ingin diprediksi. Untuk regresi, nilai prediksi dihitung sebagai rata-rata dari nilai target (output) tetangga-tetangga terdekat. [[3](https://www.researchgate.net/profile/Asep-Ismail-3/publication/330840826_Cara_Kerja_Algoritma_k-Nearest_Neighbor_k-NN/links/5c56f8d9458515a4c7553b2b/Cara-Kerja-Algoritma-k-Nearest-Neighbor-k-NN.pdf)]
+  - ***Membuat model dengan Algoritma Random Forest.***
+    Random Forest adalah pengembangan dari metode Decision Tree yang menggunakan beberapa Decision Tree, dimana setiap Decision Tree telah dilakukan pelatihan menggunakan sampel individu dan setiap atribut dipecah pada pohon yang dipilih antara atribut subset yang bersifat acak. Random Forest memiliki beberapa kelebihan, yaitu dapat meningkatkan hasil akurasi jika terdapat data yang hilang, dan untuk resisting outliers, serta efisien untuk penyimpanan sebuah data. Selain itu, Random Forest mempunyai proses seleksi fitur dimana mampu mengambil fitur terbaik sehingga dapat meningkatkan performa terhadap model klasifikasi. Dengan adanya seleksi fitur tentu Random Forest dapat bekerja pada big data dengan parameter yang kompleks secara efektif. Cara kerja dari Algoritma Random Forest adalah kumpulan (ensemble) dari pohon keputusan. Setiap pohon dilatih pada subset acak dari data, dan hasil akhirnya adalah rata-rata dari prediksi semua pohon. Algoritma ini mengurangi overfitting dengan menggabungkan hasil dari banyak pohon yang berbeda.[[4](https://journal.stekom.ac.id/index.php/Bisnis/article/download/247/182)]
+  - ***Membuat model dengan Algortima Boosting.***
+    Adaptive boosting (adaboost) merupakan salah satu dari beberapa varian pada algoritma boosting. Adaboost merupakan ensemble learning yang sering digunakan pada algoritma boosting Boosting bisa dikombinasikan dengan classifier algoritma yang lain untuk meningkatkan performa klasifikasi. Tentunya secara intuitif, penggabungan beberapa model akan membantu jika model tersebut berbeda satu sama lain. Adaboost dan variannya telah sukses diterapkan pada beberapa bidang (domain) karena dasar teorinya yang kuat, presdiksi yang akurat, dan kesederhanaan yang besar. Cara kerja Algoritma ini meningkatkan akurasi prediksi dengan membangun model secara berurutan. Setiap model baru berfokus pada kesalahan yang dibuat oleh model sebelumnya. Boosting menggabungkan prediksi dari beberapa model yang lebih lemah (weak learners) menjadi satu model yang lebih kuat.[[5](https://ejournal.poltekharber.ac.id/index.php/informatika/article/view/5675/2640)]
+- Implementasi Random Search untuk mengetahui parameter terbaik dan nilai terbaik, dengan menggunakan metode *RandomizedSearchCV*.
+  RandomizedSearchCV adalah teknik yang lebih efisien daripada GridSearchCV karena hanya menguji kombinasi hyperparameter secara acak berdasarkan jumlah iterasi yang ditentukan (n_iter), bukan menguji semua kemungkinan kombinasi. Teknik ini lebih cepat dan sering kali cukup efektif, terutama ketika jumlah kombinasi hyperparameter sangat besar.
 ---
 ## Model Devlopment Testing
 Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopment Testing* terhadap data, diantaranya sebagai berikut:
@@ -233,9 +247,25 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     
     **Kesimpulan**: Dari ketiga model di atas, **Boosting** memiliki performa terbaik dengan jumlah prediksi benar yang paling tinggi dan jumlah kesalahan yang paling rendah. Model **Random Forest** berada di posisi kedua, sementara **KNN** memiliki performa yang paling rendah, terutama dalam memprediksi kelas 1.
 
+4. Hubungan hasil metrik dari ketiga algoritma **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting** untuk kebutuhan bisnis.
+  - ***Pra-pemrosesan Data untuk Kualitas dan Akurasi Optimal***
+    Hasil menunjukkan bahwa pemrosesan data berkualitas baik sudah dilakukan dengan cukup optimal, mengingat model bisa mencapai akurasi dan metrik yang cukup tinggi. Namun, jika tujuan bisnis adalah meminimalkan risiko terlewatnya pasien berisiko tinggi, maka perlu fokus pada model seperti Random Forest yang memiliki recall lebih tinggi, bahkan jika sedikit mengorbankan akurasi. Ini penting karena dalam konteks kesehatan, kesalahan mengabaikan pasien berisiko bisa berdampak fatal.
+  - ***Mengembangkan Model Prediksi Risiko Gagal Jantung untuk Identifikasi Risiko Tinggi***
+    **Random Forest** adalah pilihan terbaik untuk mengembangkan model prediksi risiko gagal jantung. Dengan recall tinggi, model ini bisa meminimalkan risiko gagal mendeteksi pasien berisiko tinggi. Ini sangat penting dalam bisnis kesehatan untuk mengurangi kejadian buruk yang bisa terjadi jika pasien dengan risiko tinggi tidak terdiagnosis tepat waktu. **K-Nearest Neighbors** bisa menjadi pilihan alternatif jika bisnis membutuhkan model yang seimbang dalam presisi dan recall, misalnya untuk mencegah over-treatment (terlalu banyak pasien dianggap berisiko). **Boosting** kurang cocok jika tujuannya adalah memastikan semua pasien berisiko terdeteksi. Ini bisa meningkatkan risiko terlewatnya pasien yang sebenarnya membutuhkan intervensi medis.
+
+5. Implementasi dalam bisnis.
+  - Kustomisasi Model untuk Rumah Sakit atau Asuransi:
+    - Random Forest bisa digunakan oleh rumah sakit atau klinik untuk mendeteksi pasien dengan risiko tinggi, sehingga mereka dapat diberikan perhatian dan pemeriksaan lebih intensif.
+    - Asuransi kesehatan bisa menggunakan model ini untuk mendeteksi risiko lebih dini dan memberikan program pencegahan atau premi yang disesuaikan dengan kondisi kesehatan pelanggan.
+  - Pemberian Rekomendasi Tindakan Lanjutan:
+    - Pasien dengan skor risiko tinggi bisa diarahkan untuk melakukan pemeriksaan lanjutan seperti ekokardiogram atau uji stres.
+    - Penggunaan fitur seperti usia, tekanan darah, dan detak jantung maksimum dalam model juga memudahkan dokter untuk memberikan rekomendasi spesifik berdasarkan profil pasien.
+
 ---
 ## Kesimpulan
-Pengujian setiap model dengan algoritma yang berbeda menghasilkan nilai prediksi yang berbeda pula. Model dengan nilai yang mendekati nilai sebenarnya diperoleh pada prediksi dengan menggunakan algoritma KNN. Untuk prediksi menggunakan algoritma Random Forest dan Boosting, performanya masih dibawah prediksi model KNN. Sehingga dapat disimpulkan bahwa pada kasus ini, model dengan menggunakan Algoritma KNN lebih tepat untuk digunakan atau diterapkan.
+Pengujian setiap model dengan algoritma yang berbeda menghasilkan nilai prediksi yang berbeda pula. Model dengan hasil prediksi yang paling mendekati nilai sebenarnya diperoleh melalui algoritma K-Nearest Neighbors. Sementara itu, performa model dengan algoritma Random Forest dan Boosting masih berada di bawah performa model K-Nearest Neighbors. Oleh karena itu, dapat disimpulkan bahwa, dalam kasus ini, model dengan algoritma K-Nearest Neighbors lebih tepat untuk digunakan atau diterapkan.
+
+Dalam konteks bisnis, penggunaan algoritma K-Nearest Neighbors tidak berfokus pada deteksi risiko, karena memerlukan keseimbangan antara prediksi positif dan negatif. Namun, jika tujuan bisnis adalah untuk menangkap seluruh hasil positif, algoritma Random Forest lebih tepat digunakan karena memiliki nilai recall yang tinggi. Sebaliknya, algoritma Boosting kurang cocok digunakan karena berisiko melewatkan beberapa pasien yang seharusnya teridentifikasi.   
 
 ---
 ## Penutup
