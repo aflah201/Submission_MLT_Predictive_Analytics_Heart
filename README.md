@@ -173,6 +173,16 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Model De
     - Adaptive boosting (adaboost) merupakan salah satu dari beberapa varian pada algoritma boosting. Adaboost merupakan ensemble learning yang sering digunakan pada algoritma boosting Boosting bisa dikombinasikan dengan classifier algoritma yang lain untuk meningkatkan performa klasifikasi. Tentunya secara intuitif, penggabungan beberapa model akan membantu jika model tersebut berbeda satu sama lain. Adaboost dan variannya telah sukses diterapkan pada beberapa bidang (domain) karena dasar teorinya yang kuat, presdiksi yang akurat, dan kesederhanaan yang besar. Cara kerja Algoritma ini meningkatkan akurasi prediksi dengan membangun model secara berurutan. Setiap model baru berfokus pada kesalahan yang dibuat oleh model sebelumnya. Boosting menggabungkan prediksi dari beberapa model yang lebih lemah (weak learners) menjadi satu model yang lebih kuat.[[5](https://ejournal.poltekharber.ac.id/index.php/informatika/article/view/5675/2640)]
 - Implementasi Random Search untuk mengetahui parameter terbaik dan nilai terbaik, dengan menggunakan metode *RandomizedSearchCV*.
   RandomizedSearchCV adalah teknik yang lebih efisien daripada GridSearchCV karena hanya menguji kombinasi hyperparameter secara acak berdasarkan jumlah iterasi yang ditentukan (n_iter), bukan menguji semua kemungkinan kombinasi. Teknik ini lebih cepat dan sering kali cukup efektif, terutama ketika jumlah kombinasi hyperparameter sangat besar.
+
+  Pada Implementasi RandomizedSearchCV telah menerapkan hyperparameter tuning untuk mencari kombinasi hyperparameter yang optimal bagi setiap classifier, berikut ini penjelasan singkat:
+  - ***KNN Classifier:*** Parameter yang diuji: n_neighbors, weights, dan metric. RandomizedSearchCV melakukan pencarian kombinasi terbaik dari parameter tersebut dengan melakukan cross-validation sebanyak 5 kali (cv=5) dan iterasi sebanyak 10 (n_iter=10).
+  - ***Random Forest Classifier:*** Parameter yang diuji: n_estimators, max_depth, min_samples_split, min_samples_leaf, dan bootstrap. RandomizedSearchCV mencari kombinasi terbaik dari parameter tersebut dengan skema yang sama (5-fold cross-validation dan 10 iterasi).
+  - ***Boosting:*** Parameter yang diuji: n_estimators dan learning_rate. RandomizedSearchCV juga mencari kombinasi terbaik dengan skema yang sama.
+
+  Untuk proses dan hyperparameter yang didapatkan dari tuning RandomizedSearchCV sebagai berikut:
+  - ***KNN Classifier:*** Parameter yang diuji meliputi jumlah tetangga (n_neighbors), jenis pembobotan (weights), dan metrik pengukuran jarak (metric).
+  - ***Random Forest Classifier:*** Parameter yang diuji meliputi jumlah pohon keputusan (n_estimators), kedalaman maksimum pohon (max_depth), jumlah sampel minimum untuk split (min_samples_split), jumlah sampel minimum untuk daun (min_samples_leaf), dan penggunaan bootstrap (bootstrap).
+  - ***Boosting Classifier:*** Parameter yang diuji adalah jumlah estimator (n_estimators) dan laju pembelajaran (learning_rate).
 ---
 ## Model Devlopment Testing
 Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopment Testing* terhadap data, yaitu Mengetes hasil prediksi Model Classifier.
