@@ -162,6 +162,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     - **KNN (K-Nearest Neighbors)**
       
       Keterangan | Nilai
+      
       **Akurasi:** | 89.21%  
       **Presisi:** | 89.86%  
       **Recall:** | 88.57%  
@@ -172,6 +173,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     - **RF (Random Forest)**
       
       Keterangan | Nilai
+      
       **Akurasi:** | 88.49%  
       **Presisi:** | 87.50%  
       **Recall:** | 90.00%  
@@ -182,6 +184,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     - **Boosting**
       
       Keterangan | Nilai
+      
       **Akurasi:** | 84.17%  
       **Presisi:** | 88.71%  
       **Recall:** | 78.57%  
