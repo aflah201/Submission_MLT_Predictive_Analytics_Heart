@@ -71,6 +71,9 @@ Variable | Keterangan | Tipe Data
 
 Berikut informasi mengenai jumlah data, tipe data, data statisika, dan informasi data hilang (missing value) yang terdapat pada dataset ini:
 
+![Screenshot 2024-10-17 135043](https://github.com/user-attachments/assets/52347397-4ec8-4ac3-b88d-14d93321a65f) 
+![Screenshot 2024-10-17 135111](https://github.com/user-attachments/assets/0c1e93f1-9098-4563-82f4-2953861e67ea)
+
 ---
 ## Data Preparation
 Berikut adalah tahapan dalam melakukan data preparation:
@@ -91,19 +94,58 @@ Berikut adalah tahapan dalam melakukan data preparation:
   ```
 - Mengatasi nilai outlier dengan menampilkan boxplot & membatasi nilai outlier menggunakan metode IQR.
   - **sns.boxplot**, untuk mendeteksi adanya data yang berada di luar batas atas dan batas bawah data (outliers).
-
+    ![restingbp](https://github.com/user-attachments/assets/31d7476e-0849-43fd-b4a7-406f4f3f4f58)
+    ![cholesterol](https://github.com/user-attachments/assets/a86374d4-4a52-41c7-9808-c22485108622)
+    ![oldpeak](https://github.com/user-attachments/assets/8078e1ab-5f8e-48c3-9ddb-d2a8c38ba4d6)
+  
 - Menampilkan plot kategori untuk data yang bertipe `object`.
+    ![sex](https://github.com/user-attachments/assets/face6518-3b3c-426f-884f-c8112c77be72)
+
+  **Sex**: Kategori M memiliki jumlah sampel yang lebih tinggi dibandingkan kategori F.
+  
+    ![chestpaintype](https://github.com/user-attachments/assets/90d9fc1f-70a2-4782-9967-3c23d5c9c5a1)
+
+  **ChestPainType**: Kategori ASY memiliki frekuensi tertinggi, diikuti oleh kategori NAP dan ATA, sedangkan kategori TA memiliki frekuensi paling rendah. Ini menunjukkan distribusi tipe nyeri dada yang dialami oleh pasien dalam dataset.
+
+    ![restingecg](https://github.com/user-attachments/assets/23a2754a-f606-40ad-b128-ff1d89a466f8)
+
+  **RestingECG**: Kategori Normal memiliki frekuensi tertinggi, diikuti oleh kategori LVH dan ST. Ini menunjukkan hasil pemeriksaan EKG saat istirahat, di mana kategori tertentu lebih dominan dibandingkan lainnya.
+  
+    ![exerciseangina](https://github.com/user-attachments/assets/2035a94b-c8e9-481e-8bb9-7e738fd66695)
+
+  **ExerciseAngina**: Kategori N lebih tinggi daripada kategori Y, yang menunjukkan bahwa lebih banyak sampel yang tidak mengalami angina saat latihan dibandingkan yang mengalaminya.
+  
+    ![stslope](https://github.com/user-attachments/assets/118f60b3-1111-427b-83cb-271d70a8d009)
+
+  **ST_Slope**: Kategori Flat dan Down memiliki jumlah sampel yang hampir sama dan dominan, sementara kategori Up memiliki jumlah sampel yang jauh lebih sedikit. Ini menggambarkan pola kemiringan segmen ST setelah latihan.
 
 - Menampilkan plot numerik untuk data yang bertipe `int64` dan `float64`.
+  ![plot numerik](https://github.com/user-attachments/assets/25c3486b-9348-4294-ad51-a8ea24398a90)
 
 - Menampilkan plot untuk mempertimbangkan Fitur Numerik dengan Fitur Kategori.
   - **sns.catplot**, untuk menampilkan Fitur HeartDisease.
+    ![sns1](https://github.com/user-attachments/assets/d1fe4e4c-30ff-471c-a515-de05111b84c2)
+    ![sns2](https://github.com/user-attachments/assets/dcd43c08-7178-476e-b7dd-ed4e2a5048f6)
+    ![sns3](https://github.com/user-attachments/assets/e76d644c-6347-4f90-8b14-15f53183ec71)
+    ![sns4](https://github.com/user-attachments/assets/ce2ab703-e68e-4b92-be9d-9888fae370a6)
+    ![sns5](https://github.com/user-attachments/assets/6563209c-7244-4b80-aca1-1f2a77a11510)
 
+    Beberapa hal yang dapat kita peroleh dari visualisai informasi tersebut adalah :
+    - Rata-rata jenis kelamin pria yang terkena penyakit jantung lebih banyak, daripada jenis kelamin perempuan.
+    - Rata-rata yang terkena penyakit jantung, menggambarkan kondisi seseorang yang menderita penyakit, tetapi tidak menunjukkan gejala klinis apa pun.
+    - Rata-rata penyakit jantung, mengalami kelainan gelombang atau hipertrofi vertikal kiri.
+    - Rata-rata penyakit jantung, terkena angina akibat olahraga.
+    - Rata-rata penyakit jantung, akibat Kemiringan segmen ST terhadap denyut jantung yang dihitung dengan linear regression.
+    
 - Menampilkan plot untuk mengetahui hubungan fitur numerik.
   - **sns.pairplot**, untuk menampilkan hubungan fitur yang bertipe data `int64` dan `float64`.
+    ![pairplot](https://github.com/user-attachments/assets/75b22601-53ed-4530-ab22-d45b15f0ab67)
 
-- Menampilkan Korelasi Metrik untuk fitur numerik.
+    Pairplot menunjukkan bahwa terdapat beberapa perbedaan pola distribusi dan hubungan antar variabel antara individu yang memiliki dan tidak memiliki penyakit jantung. Misalnya, variabel seperti Age, MaxHR, dan Oldpeak memperlihatkan kecenderungan yang berbeda untuk kedua kelompok. Hal ini mengindikasikan bahwa variabel-variabel tersebut bisa menjadi indikator penting dalam memprediksi risiko penyakit jantung.
+- Menampilkan Korelasi Metrik untuk fitur numerik menggunakan **sns.heatmap**
+  ![korelasi](https://github.com/user-attachments/assets/699847cf-4d45-4ba7-8f75-2aee87da4572)
 
+  Matriks korelasi menunjukkan bahwa **Oldpeak**, **MaxHR**, dan **Umur** adalah fitur yang paling berpengaruh terhadap penyakit jantung. **Oldpeak** memiliki korelasi positif terkuat (0.5), menunjukkan bahwa penurunan ST setelah olahraga sangat terkait dengan risiko penyakit jantung. **MaxHR** memiliki korelasi negatif (-0.39), menunjukkan bahwa detak jantung maksimal yang lebih rendah cenderung terkait dengan risiko lebih tinggi. **Umur** juga berhubungan positif (0.31), artinya semakin tua, semakin besar risiko penyakit jantung. Fitur lain seperti **Kolesterol** dan **RestingBP** menunjukkan hubungan yang lemah, sehingga kurang signifikan dalam menentukan risiko penyakit jantung dalam dataset ini.
 - Membuat Encoding untuk fitur kategori yang berisi tipe data `object` agar dapat berubah menjadi numerik, setelah selesai membuat fitur encoding jangan lupa untuk menghapus kolom yang bertipe data `object` dikarenakan sudah diubah menjadi data numerik.
 - Membagi dataset 80% untuk data latih, 20% untuk data uji.
   ```
