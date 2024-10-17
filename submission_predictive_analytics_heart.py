@@ -143,17 +143,26 @@ df.describe()
 df.drop(['FastingBS'], axis=1, inplace=True)
 df.head()
 
-"""6. Menampilkan outliers 'RestingBP'."""
+"""6. Menampilkan outliers `RestingBP`,`Cholesterol`,dan `Oldpeak`.
 
-sns.boxplot(x=df['RestingBP'])
+"""
 
-"""7. Menampilkan outliers 'Cholesterol'."""
+# Atur ukuran canvas dan buat grid layout 1 baris x 3 kolom
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(18, 5))  # Ukuran disesuaikan
 
-sns.boxplot(x=df['Cholesterol'])
+# Plot boxplot di setiap kolom
+sns.boxplot(x=df['RestingBP'], ax=axes[0])  # Plot pertama
+axes[0].set_title('RestingBP', fontsize=14)
 
-"""8. Menampilkan outliers 'Oldpeak'."""
+sns.boxplot(x=df['Cholesterol'], ax=axes[1])  # Plot kedua
+axes[1].set_title('Cholesterol', fontsize=14)
 
-sns.boxplot(x=df['Oldpeak'])
+sns.boxplot(x=df['Oldpeak'], ax=axes[2])  # Plot ketiga
+axes[2].set_title('Oldpeak', fontsize=14)
+
+# Sesuaikan layout agar lebih rapi
+plt.tight_layout()
+plt.show()
 
 """Dari boxplot diatas, kita dapat mengidentifikasi **outliers** (pencilan) dalam data:
 
@@ -162,7 +171,7 @@ sns.boxplot(x=df['Oldpeak'])
 3. **Garis-garis horizontal** (whiskers) yang keluar dari kotak menunjukkan rentang data di luar Q1 dan Q3, umumnya diperpanjang hingga 1,5 kali IQR dari kuartil terendah (Q1) dan tertinggi (Q3).
 4. **Titik-titik** di luar whiskers adalah **outliers**. Titik-titik ini mewakili nilai yang berada di luar rentang 1,5 kali IQR dari Q1 dan Q3, menandakan nilai `'RestingBP','Cholesterol', 'Oldpeak'` yang jauh dari mayoritas data.
 
-9. Membatasi nilai outliers.
+7. Membatasi nilai outliers.
 """
 
 df_numeric = df.select_dtypes(include=[np.number])
@@ -174,7 +183,7 @@ df_cleaned=df[~((df_numeric<(Q1-1.5*IQR))|(df_numeric>(Q3+1.5*IQR))).any(axis=1)
 # Cek ukuran dataset setelah kita drop outliers
 df_cleaned.shape
 
-"""10. Menampilkan dataset yang telah dibersihkan."""
+"""8. Menampilkan dataset yang telah dibersihkan."""
 
 df_cleaned.info()
 
@@ -191,50 +200,46 @@ numerical_features = df.select_dtypes(include=['int64', 'float64']).columns
 2. Menampilkan plot kategori
 """
 
-feature = categorical_features[0]
-count = df_cleaned[feature].value_counts()
-percent = 100*df_cleaned[feature].value_counts(normalize=True)
-df = pd.DataFrame({'jumlah sampel':count, 'persentase':percent.round(1)})
-print(df)
-count.plot(kind='bar', title=feature)
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(18, 10))  # Grid 2x3
+colors = sns.color_palette('hls', len(categorical_features))  # Palet warna
 
-"""* **Sex**: Kategori M memiliki jumlah sampel yang lebih tinggi dibandingkan kategori F."""
+# Flatten axes agar bisa diakses dengan iterasi
+axes = axes.flatten()
 
-feature = categorical_features[1]
-count = df_cleaned[feature].value_counts()
-percent = 100*df_cleaned[feature].value_counts(normalize=True)
-df = pd.DataFrame({'jumlah sampel':count, 'persentase':percent.round(1)})
-print(df)
-count.plot(kind='bar', title=feature)
+# Looping untuk setiap fitur kategorikal
+for i, feature in enumerate(categorical_features):
+    count = df_cleaned[feature].value_counts()
+    percent = 100 * df_cleaned[feature].value_counts(normalize=True)
 
-"""* **ChestPainType**: Kategori ASY memiliki frekuensi tertinggi, diikuti oleh kategori NAP dan ATA, sedangkan kategori TA memiliki frekuensi paling rendah. Ini menunjukkan distribusi tipe nyeri dada yang dialami oleh pasien dalam dataset."""
+    # Plot pada subplot tertentu
+    ax = axes[i]
+    bars = count.plot(kind='bar', ax=ax, color=colors[i], title=feature, rot=0)
 
-feature = categorical_features[2]
-count = df_cleaned[feature].value_counts()
-percent = 100*df_cleaned[feature].value_counts(normalize=True)
-df = pd.DataFrame({'jumlah sampel':count, 'persentase':percent.round(1)})
-print(df)
-count.plot(kind='bar', title=feature)
+    # Tambahkan nilai di atas setiap batang
+    for bar in bars.patches:
+        ax.annotate(
+            f'{bar.get_height()}',
+            (bar.get_x() + bar.get_width() / 2, bar.get_height()),
+            ha='center', va='bottom', fontsize=10, color='black'
+        )
 
-"""* **RestingECG**: Kategori Normal memiliki frekuensi tertinggi, diikuti oleh kategori LVH dan ST. Ini menunjukkan hasil pemeriksaan EKG saat istirahat, di mana kategori tertentu lebih dominan dibandingkan lainnya."""
+    # Label sumbu
+    ax.set_xlabel(feature)
+    ax.set_ylabel('Jumlah')
 
-feature = categorical_features[3]
-count = df_cleaned[feature].value_counts()
-percent = 100*df_cleaned[feature].value_counts(normalize=True)
-df = pd.DataFrame({'jumlah sampel':count, 'persentase':percent.round(1)})
-print(df)
-count.plot(kind='bar', title=feature)
+# Hapus subplot kosong jika ada
+for j in range(len(categorical_features), len(axes)):
+    fig.delaxes(axes[j])
 
-"""* **ExerciseAngina**: Kategori N lebih tinggi daripada kategori Y, yang menunjukkan bahwa lebih banyak sampel yang tidak mengalami angina saat latihan dibandingkan yang mengalaminya."""
+# Atur layout supaya tidak overlap
+plt.tight_layout()
+plt.show()
 
-feature = categorical_features[4]
-count = df_cleaned[feature].value_counts()
-percent = 100*df_cleaned[feature].value_counts(normalize=True)
-df = pd.DataFrame({'jumlah sampel':count, 'persentase':percent.round(1)})
-print(df)
-count.plot(kind='bar', title=feature)
-
-"""* **ST_Slope**: Kategori Flat dan Down memiliki jumlah sampel yang hampir sama dan dominan, sementara kategori Up memiliki jumlah sampel yang jauh lebih sedikit. Ini menggambarkan pola kemiringan segmen ST setelah latihan.
+"""* **Sex**: Kategori M memiliki jumlah sampel yang lebih tinggi dibandingkan kategori F.
+* **ChestPainType**: Kategori ASY memiliki frekuensi tertinggi, diikuti oleh kategori NAP dan ATA, sedangkan kategori TA memiliki frekuensi paling rendah. Ini menunjukkan distribusi tipe nyeri dada yang dialami oleh pasien dalam dataset.
+* **RestingECG**: Kategori Normal memiliki frekuensi tertinggi, diikuti oleh kategori LVH dan ST. Ini menunjukkan hasil pemeriksaan EKG saat istirahat, di mana kategori tertentu lebih dominan dibandingkan lainnya.
+* **ExerciseAngina**: Kategori N lebih tinggi daripada kategori Y, yang menunjukkan bahwa lebih banyak sampel yang tidak mengalami angina saat latihan dibandingkan yang mengalaminya.
+* **ST_Slope**: Kategori Flat dan Down memiliki jumlah sampel yang hampir sama dan dominan, sementara kategori Up memiliki jumlah sampel yang jauh lebih sedikit. Ini menggambarkan pola kemiringan segmen ST setelah latihan.
 
 ### Numerical Features
 
