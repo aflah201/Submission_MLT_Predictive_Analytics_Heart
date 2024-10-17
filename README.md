@@ -77,8 +77,12 @@ Berikut informasi mengenai jumlah data, tipe data, data statisika, dan informasi
 Dalam memudahkan proses analisis diperlukan beberapa visualisasi data, seperti:
 - ***sns.bloxpot***, untuk mendeteksi adanya nilai outliers.
 
+    ![NilaiOutlier 3baris](https://github.com/user-attachments/assets/25288b57-0b57-4dcb-ab66-464a33bcb167)
+
 - ***count.plot***, untuk menganalisa fitur kategori diantaranya `Sex, ChestPainType, RestingECG, ExerciseAngina, ST_Slope`.
 
+    ![PlotKategori 5 kotak](https://github.com/user-attachments/assets/0cec36e2-ed25-48f7-bf02-337371241dcf)
+    
   Dengan penjelasan sebagai berikut:
   - **Sex**: Kategori M memiliki jumlah sampel yang lebih tinggi dibandingkan kategori F.
   - **ChestPainType**: Kategori ASY memiliki frekuensi tertinggi, diikuti oleh kategori NAP dan ATA, sedangkan kategori TA memiliki frekuensi paling rendah. Ini menunjukkan distribusi tipe nyeri dada yang dialami oleh pasien dalam dataset.
@@ -86,6 +90,12 @@ Dalam memudahkan proses analisis diperlukan beberapa visualisasi data, seperti:
   - **ExerciseAngina**: Kategori N lebih tinggi daripada kategori Y, yang menunjukkan bahwa lebih banyak sampel yang tidak mengalami angina saat latihan dibandingkan yang mengalaminya.
   - **ST_Slope**: Kategori Flat dan Down memiliki jumlah sampel yang hampir sama dan dominan, sementara kategori Up memiliki jumlah sampel yang jauh lebih sedikit. Ini menggambarkan pola kemiringan segmen ST setelah latihan.
 - ***sns.catplot***, untuk mempertimbangkan fitur HeartDisease dengan kategori.
+
+    ![sns1](https://github.com/user-attachments/assets/303ca59a-ed1a-4a8a-ad62-7a3cdd1faceb)
+    ![sns2](https://github.com/user-attachments/assets/93eb59f9-b66e-4d4f-a775-eff43b26a16c)
+    ![sns3](https://github.com/user-attachments/assets/87c62b74-3b7b-42eb-bf61-24d7a007fb83)
+    ![sns4](https://github.com/user-attachments/assets/6c25fe41-28ff-4600-a9cb-9366e253f1c6)
+    ![sns5](https://github.com/user-attachments/assets/37364de8-2cc9-4fa2-a14c-29c2f8241228)
 
   Beberapa hal yang dapat kita peroleh dari visualisai informasi tersebut adalah :
     - Rata-rata jenis kelamin pria yang terkena penyakit jantung lebih banyak, daripada jenis kelamin perempuan.
@@ -95,8 +105,12 @@ Dalam memudahkan proses analisis diperlukan beberapa visualisasi data, seperti:
     - Rata-rata penyakit jantung, akibat Kemiringan segmen ST terhadap denyut jantung yang dihitung dengan linear regression.
 - ***sns.pairplot***, untuk menunjukkan semua grafik fitur numerik.
 
+    ![pairplot](https://github.com/user-attachments/assets/cf18dea4-2a56-4d01-9d46-cb5256f40305)
+
   Pairplot menunjukkan bahwa terdapat beberapa perbedaan pola distribusi dan hubungan antar variabel antara individu yang memiliki dan tidak memiliki penyakit jantung. Misalnya, variabel seperti Age, MaxHR, dan Oldpeak memperlihatkan kecenderungan yang berbeda untuk kedua kelompok. Hal ini mengindikasikan bahwa variabel-variabel tersebut bisa menjadi indikator penting dalam memprediksi risiko penyakit jantung.
 - ***sns.heatmap***, untuk menunjukkan metrik korelasi fitur numerik.
+
+    ![korelasi](https://github.com/user-attachments/assets/a597af4e-d55f-4137-8971-a7a49436deea)
 
   Matriks korelasi menunjukkan bahwa **Oldpeak**, **MaxHR**, dan **Umur** adalah fitur yang paling berpengaruh terhadap penyakit jantung. **Oldpeak** memiliki korelasi positif terkuat (0.5), menunjukkan bahwa penurunan ST setelah olahraga sangat terkait dengan risiko penyakit jantung. **MaxHR** memiliki korelasi negatif (-0.39), menunjukkan bahwa detak jantung maksimal yang lebih rendah cenderung terkait dengan risiko lebih tinggi. **Umur** juga berhubungan positif (0.31), artinya semakin tua, semakin besar risiko penyakit jantung. Fitur lain seperti **Kolesterol** dan **RestingBP** menunjukkan hubungan yang lemah, sehingga kurang signifikan dalam menentukan risiko penyakit jantung dalam dataset ini.
 ---
