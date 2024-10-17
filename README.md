@@ -164,7 +164,7 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Model De
   models = pd.DataFrame(index=['train_mse', 'test_mse'],
                         columns=['KNN', 'RandomForest', 'Boosting'])
   ```
-- Membuat Model MSE (Mean Squared Error) & Classifier
+- Membuat Model MSE Classifier
   - ***Membuat model dengan Algoritma K-Nearest Neighbor.***
     - Algoritma k-Nearest Neighbor adalah algoritma supervised learning dimana hasil dari instance yang baru diklasikasikan berdasarkan mayoritas dari kategori k-tetangga terdekat. Tujuan dari algoritma ini adalah untuk mengklasikasikan obyek baru berdasarkan atribut dan sample-sample dari training data. Algoritma k-Nearest Neighbor menggunakan Neighborhood Classication sebagai nilai prediksi dari nilai instance yang baru. Cara kerja dari Algoritma ini bekerja dengan mencari sejumlah tetangga terdekat (n_neighbors) dari data yang ingin diprediksi. Untuk regresi, nilai prediksi dihitung sebagai rata-rata dari nilai target (output) tetangga-tetangga terdekat. [[3](https://www.researchgate.net/profile/Asep-Ismail-3/publication/330840826_Cara_Kerja_Algoritma_k-Nearest_Neighbor_k-NN/links/5c56f8d9458515a4c7553b2b/Cara-Kerja-Algoritma-k-Nearest-Neighbor-k-NN.pdf)]
   - ***Membuat model dengan Algoritma Random Forest.***
@@ -175,9 +175,7 @@ Setelah melakukan pra-pemrosesan pada data, langkah selanjutnya adalah *Model De
   RandomizedSearchCV adalah teknik yang lebih efisien daripada GridSearchCV karena hanya menguji kombinasi hyperparameter secara acak berdasarkan jumlah iterasi yang ditentukan (n_iter), bukan menguji semua kemungkinan kombinasi. Teknik ini lebih cepat dan sering kali cukup efektif, terutama ketika jumlah kombinasi hyperparameter sangat besar.
 ---
 ## Model Devlopment Testing
-Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopment Testing* terhadap data, diantaranya sebagai berikut:
-1. Mengetes hasil prediksi Model MSE (Mean Squared Error).
-2. Mengetes hasil prediksi Model Classifier.
+Setelah melakukan modeling pada data, langkah selanjutnya adalah *Model Devlopment Testing* terhadap data, yaitu Mengetes hasil prediksi Model Classifier.
 
 ---
 ## Evaluation
@@ -226,40 +224,7 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     - **Random Forest** unggul dalam hal **Recall**, sehingga cocok jika prioritas adalah meminimalkan false negative.
     - **Boosting** meskipun memiliki presisi tinggi, kurang optimal dalam menangkap semua kasus positif (recall rendah).
 
-2. Menampilkan hasil evaluasi MSE
-
-    Berikut hasil dari pengukuran model:
-
-    ![download](https://github.com/user-attachments/assets/e0b581c7-4319-47bf-b7d9-b5f612067581)
-
-    Gambar di atas menunjukkan hasil evaluasi dari tiga model machine learning: Random Forest (RF), K-Nearest Neighbors (KNN), dan Boosting. Grafik tersebut membandingkan performa model pada data training dan testing dalam bentuk bar horizontal. Berikut penjelasan dari setiap model:
-    
-      - **Boosting**:
-        - Performa pada data training (warna biru) dan testing (warna oranye) sangat mirip dan tinggi, menunjukkan bahwa model ini memiliki kemampuan generalisasi yang baik. Tidak ada tanda overfitting atau underfitting yang signifikan.
-    
-      - **KNN**:
-        - Performa pada data training dan testing hampir sama seperti Boosting. Nilai pada kedua dataset ini juga tinggi dan konsisten. Hal ini menunjukkan bahwa KNN cukup efektif dalam memprediksi data baru tanpa overfitting.
-    
-      - **Random Forest (RF)**:
-        - Pada model ini, terlihat perbedaan yang cukup signifikan antara performa pada data training dan testing. Performa pada data training jauh lebih rendah dibandingkan dengan testing, yang mungkin menunjukkan bahwa model ini mengalami underfitting atau memiliki performa yang kurang optimal pada data training.
-
-    Secara keseluruhan, Boosting dan KNN menunjukkan performa yang lebih baik dan stabil dibandingkan dengan RF. Boosting dan KNN sepertinya merupakan pilihan yang lebih baik untuk dataset ini.
-    
-    Hasil prediksi yang paling mendekati nilai HeartDisease didapatkan oleh algoritma KNN dengan hasil akhir sebagai berikut.
-    
-    ![Screenshot 2024-10-17 031140](https://github.com/user-attachments/assets/07199710-d20a-4a24-9072-002e7892e8ed)
-    
-    Hasil di atas menunjukkan perbandingan nilai **HeartDisease** dengan **prediksi** dari tiga model berbeda untuk satu data (baris ke-629):
-    
-      * **`HeartDisease`**: Nilai asli adalah **0**.
-      * **`prediksi_KNN`**: Model **KNN** memprediksi **0.4**.
-      * **`prediksi_RF`**: Model **Random Forest** memprediksi **0.8**.
-      * **`prediksi_Boosting`**: Model **Boosting** memprediksi **0.5**.
-    
-    Kita dapat melihat bahwa model dengan algoritma KNN memiliki hasil prediksi 0.4, algoritma Random Forest memiliki hasil prediksi 0.8, dan algoritma Boosting memiliki hasil prediksi 0.5, perlu diketahui jika probabilitas lebih dari 0.5, kelas yang diprediksi adalah 1, jika kurang dari 0.5, kelas yang diprediksi adalah 0.
-    Jadi, nilai asli adalah 0, dan semua model memiliki perbedaan prediksi, tetapi model **KNN** paling mendekati (0.4).
-
-3. Menampilkan hasil evaluasi classifier
+2. Menampilkan hasil evaluasi classifier
 
     ![hasil heatmap](https://github.com/user-attachments/assets/f185a178-565e-4214-a6c1-4d016c8e348c)
 
@@ -282,13 +247,13 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     
     **Kesimpulan**: Dari ketiga model di atas, **Boosting** memiliki performa terbaik dengan jumlah prediksi benar yang paling tinggi dan jumlah kesalahan yang paling rendah. Model **Random Forest** berada di posisi kedua, sementara **KNN** memiliki performa yang paling rendah, terutama dalam memprediksi kelas 1.
 
-4. Hubungan hasil metrik dari ketiga algoritma **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting** untuk kebutuhan bisnis.
+3. Hubungan hasil metrik dari ketiga algoritma **K-Nearest Neighbors (KNN)**, **Random Forest (RF)**, dan **Boosting** untuk kebutuhan bisnis.
     - ***Pra-pemrosesan Data untuk Kualitas dan Akurasi Optimal***
       Hasil menunjukkan bahwa pemrosesan data berkualitas baik sudah dilakukan dengan cukup optimal, mengingat model bisa mencapai akurasi dan metrik yang cukup tinggi. Namun, jika tujuan bisnis adalah meminimalkan risiko terlewatnya pasien berisiko tinggi, maka perlu fokus pada model seperti Random Forest yang memiliki recall lebih tinggi, bahkan jika sedikit mengorbankan akurasi. Ini penting karena dalam konteks kesehatan, kesalahan mengabaikan pasien berisiko bisa berdampak fatal.
     - ***Mengembangkan Model Prediksi Risiko Gagal Jantung untuk Identifikasi Risiko Tinggi***
       **Random Forest** adalah pilihan terbaik untuk mengembangkan model prediksi risiko gagal jantung. Dengan recall tinggi, model ini bisa meminimalkan risiko gagal mendeteksi pasien berisiko tinggi. Ini sangat penting dalam bisnis kesehatan untuk mengurangi kejadian buruk yang bisa terjadi jika pasien dengan risiko tinggi tidak terdiagnosis tepat waktu. **K-Nearest Neighbors** bisa menjadi pilihan alternatif jika bisnis membutuhkan model yang seimbang dalam presisi dan recall, misalnya untuk mencegah over-treatment (terlalu banyak pasien dianggap berisiko). **Boosting** kurang cocok jika tujuannya adalah memastikan semua pasien berisiko terdeteksi. Ini bisa meningkatkan risiko terlewatnya pasien yang sebenarnya membutuhkan intervensi medis.
 
-5. Implementasi dalam bisnis.
+4. Implementasi dalam bisnis.
     - Kustomisasi Model untuk Rumah Sakit atau Asuransi:
       - Random Forest bisa digunakan oleh rumah sakit atau klinik untuk mendeteksi pasien dengan risiko tinggi, sehingga mereka dapat diberikan perhatian dan pemeriksaan lebih intensif.
       - Asuransi kesehatan bisa menggunakan model ini untuk mendeteksi risiko lebih dini dan memberikan program pencegahan atau premi yang disesuaikan dengan kondisi kesehatan pelanggan.
