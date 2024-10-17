@@ -162,33 +162,33 @@ Setelah melakukan model developmenet testing pada data, langkah selanjutnya adal
     - **KNN (K-Nearest Neighbors)**
       
       Keterangan | Nilai
-      
-      **Akurasi:** | 89.21%  
-      **Presisi:** | 89.86%  
-      **Recall:** | 88.57%  
-      **F1-Score:** | 89.21%
+      ---|---
+      **Akurasi** | 89.21%  
+      **Presisi** | 89.86%  
+      **Recall** | 88.57%  
+      **F1-Score** | 89.21%
        
       **KNN** menunjukkan kinerja tertinggi secara keseluruhan. Akurasi dan F1-Score yang lebih tinggi menandakan bahwa KNN mampu memprediksi kelas dengan baik dan seimbang antara precision dan recall.
 
     - **RF (Random Forest)**
       
       Keterangan | Nilai
-      
-      **Akurasi:** | 88.49%  
-      **Presisi:** | 87.50%  
-      **Recall:** | 90.00%  
-      **F1-Score:** | 88.73%
+      ---|---
+      **Akurasi** | 88.49%  
+      **Presisi** | 87.50%  
+      **Recall** | 90.00%  
+      **F1-Score** | 88.73%
 
       **Random Forest** memiliki **Recall** paling tinggi (90%). Ini berarti RF lebih baik dalam mengidentifikasi kasus positif dengan benar, namun sedikit kalah dalam akurasi dan F1-Score dibandingkan KNN. Jika aplikasi memerlukan fokus pada deteksi positif yang tinggi (misalnya deteksi penyakit), RF bisa menjadi pilihan yang baik.
 
     - **Boosting**
       
       Keterangan | Nilai
-      
-      **Akurasi:** | 84.17%  
-      **Presisi:** | 88.71%  
-      **Recall:** | 78.57%  
-      **F1-Score:** | 83.33%
+      ---|---
+      **Akurasi** | 84.17%  
+      **Presisi** | 88.71%  
+      **Recall** | 78.57%  
+      **F1-Score** | 83.33%
 
       **Boosting** memiliki performa terendah dalam hal akurasi dan F1-Score. Meskipun presisinya tinggi (88.71%), **Recall** relatif rendah (78.57%). Ini menunjukkan bahwa Boosting lebih sering melewatkan kasus positif dibandingkan model lainnya.  
 
